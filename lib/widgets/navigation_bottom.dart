@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/views/doaa_body.dart';
 import 'package:hajj_app/views/home_body.dart';
 import 'package:hajj_app/views/home_page.dart';
@@ -8,6 +9,7 @@ import 'package:hajj_app/views/place_body.dart';
 
 class NavigationBottom extends StatefulWidget {
   const NavigationBottom({super.key});
+  
 
   @override
   State<NavigationBottom> createState() => _NavigationBottomState();
@@ -15,10 +17,18 @@ class NavigationBottom extends StatefulWidget {
 
 class _NavigationBottomState extends State<NavigationBottom> {
   int currentPageIndex = 0;
+
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
+      // appBar: currentPageIndex == 2 || currentPageIndex == 3
+      //     ? null
+      //     :AppBar(
+      //   automaticallyImplyLeading: false,
+      //     ),
+      
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {
@@ -51,7 +61,7 @@ class _NavigationBottomState extends State<NavigationBottom> {
         const DoaaBody(),
         const MnaskBody(),
         const PlaceBody(),
-      ][currentPageIndex],
+      ][currentPageIndex]
     );
   }
 }

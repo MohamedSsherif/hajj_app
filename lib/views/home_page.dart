@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/views/azkar_page.dart';
+import 'package:hajj_app/views/home_body.dart';
 import 'package:hajj_app/views/prayer_time.dart';
 import 'package:hajj_app/views/quibla.dart';
+import 'package:hajj_app/views/tasbih_page.dart';
 import 'package:hajj_app/widgets/List_title_drawer.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:hajj_app/widgets/navigation_bottom.dart';
@@ -13,7 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+          appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -35,8 +37,8 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: KPrimaryColor,
       ),
-      body: const NavigationBottom(),
-      endDrawer: Drawer(
+      // bottomNavigationBar: NavigationBottom(), 
+          endDrawer: Drawer(
           child: ListView(
         children: [
           const DrawerHeader(
@@ -60,7 +62,6 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-         
           ListTileDrawer(
             title: 'مواقيت الصلاه',
             icon: const Icon(FlutterIslamicIcons.kowtow),
@@ -80,7 +81,13 @@ class HomePage extends StatelessWidget {
             icon: const Icon(FlutterIslamicIcons.hadji),
             onTap: () {
               Navigator.pushNamed(context, AzkarPage.id);
-            
+            },
+          ),
+           ListTileDrawer(
+            title: 'المسبحه',
+            icon: const Icon(FlutterIslamicIcons.tasbih),
+            onTap: () {
+              Navigator.pushNamed(context, TasbihPage.id);
             },
           ),
           ListTileDrawer(
@@ -88,7 +95,11 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.help_center_outlined),
           ),
         ],
-      )),
+      )),  
+     body:NavigationBottom(), 
+        
+        
+      
     );
   }
 }

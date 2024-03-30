@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  audioplayers: ^5.2.0
   flutter:
     sdk: flutter
 
@@ -44,6 +45,7 @@ dependencies:
   flutter_compass: ^0.8.0
   flutter_svg: ^2.0.10+1
   weather_icons: ^3.0.0
+  video_player: ^2.8.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,6 +72,8 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
+    - assets/audio/
+    - flutter_assets/videos/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,3 +1,6 @@
 import 'dart:ui';
 
-const KPrimaryColor = Color.fromARGB(255, 64, 176, 237);
+import 'package:flutter/material.dart';
+
+const KPrimaryColor = Color.fromARGB(255, 100, 100, 100);
+//Color.fromARGB(255, 64, 176, 237);

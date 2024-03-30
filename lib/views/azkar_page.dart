@@ -11,7 +11,7 @@ class AzkarPage extends StatefulWidget {
 class _AzkarPageState extends State<AzkarPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List _items = [];
+ // List _items = [];
 
   @override
   void initState() {

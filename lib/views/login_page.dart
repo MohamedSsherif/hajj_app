@@ -91,7 +91,7 @@ class _loginPageState extends State<loginPage> {
                       try {
                         await Login();
                         showSnackBar(context, 'success');
-                        //Navigator.pushNamed(context, HomePage.id);
+                        Navigator.pushNamed(context, HomePage.id);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           showSnackBar(
@@ -107,7 +107,7 @@ class _loginPageState extends State<loginPage> {
                         isLoading = false;
                       });
                     }
-                    Navigator.pushNamed(context, HomePage.id);
+                   // Navigator.pushNamed(context, HomePage.id);
                   },
                     
                   text: 'Sign In',

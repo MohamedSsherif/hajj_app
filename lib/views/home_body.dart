@@ -5,7 +5,7 @@ import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/prayer_time.dart';
 import 'package:hajj_app/views/quibla.dart';
 import 'package:hajj_app/widgets/List_title_drawer.dart';
-import 'package:hajj_app/widgets/navigation_bottom.dart';
+
 
 class HomeBody extends StatelessWidget {
   static const String id = 'home_body';

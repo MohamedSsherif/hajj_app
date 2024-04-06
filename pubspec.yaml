@@ -46,6 +46,8 @@ dependencies:
   flutter_svg: ^2.0.10+1
   weather_icons: ^3.0.0
   video_player: ^2.8.3
+  get: ^4.6.6
+  video_360: ^0.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

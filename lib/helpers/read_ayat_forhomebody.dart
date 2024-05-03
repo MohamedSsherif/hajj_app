@@ -60,7 +60,7 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         const Padding(
-          padding: EdgeInsets.only(bottom: 30, top: 10),
+          padding: EdgeInsets.only(bottom: 5, top: 10),
           child: Center(
             child: Text(
               'بَــعـض مــن الآيــات الــقــرآنــيــة',
@@ -76,12 +76,11 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
           textDirection: TextDirection.rtl,
           children: [
             SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: Image.asset(
-                  "assets/images/luxury-golden-islamic-title-frame-for-ramadan-kareem-free-png.webp",
-                  fit: BoxFit.cover,
-                )),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: Image.asset("assets/images/luxury-golden-islamic-title-frame-for-ramadan-kareem-free-png.webp",
+                  fit: BoxFit.cover, height: MediaQuery.of(context).size.height * 0.2, width: MediaQuery.of(context).size.width),
+            ),
 
             // ClipRRect(
             //     borderRadius: BorderRadius.circular(10),
@@ -102,7 +101,7 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
                   ayatList = snapshot.data!;
                   return Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.035, bottom: 8.0),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * .7,
                         // height: MediaQuery.of(context).size.height * 0.05,

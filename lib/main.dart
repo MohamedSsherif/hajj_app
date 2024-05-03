@@ -27,7 +27,7 @@ class Hajj extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        loginPage.id: (context) => loginPage(),
+        LoginPage.id: (context) => LoginPage(),
         Register.id: (context) => Register(),
         HomePage.id: (context) => const HomePage(),
         QuiblahPage.id: (context) => const QuiblahPage(),
@@ -39,7 +39,7 @@ class Hajj extends StatelessWidget {
         // HomeBody.id: (context) =>  HomeBody(),
         // DoaaBody.id: (context) =>  DoaaBody(),
       },
-      initialRoute: loginPage.id,
+      initialRoute: LoginPage.id,
     );
   }
 }

@@ -1,8 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_snack_bar.dart';
 import 'package:hajj_app/views/home_page.dart';
@@ -12,27 +13,25 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../widgets/custom_button.dart';
 
-class loginPage extends StatefulWidget {
-  loginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   static String id = 'LoginPage';
 
-
-
   @override
-  State<loginPage> createState() => _loginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _loginPageState extends State<loginPage> {
+class _LoginPageState extends State<LoginPage> {
   String? email;
 
   String? password;
   bool isLoading = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
-  
-  late TextEditingController emailController; 
-  late TextEditingController passwordController; 
+
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
 
   @override
   void initState() {
@@ -55,7 +54,7 @@ class _loginPageState extends State<loginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 150,
                 ),
                 const CircleAvatar(
@@ -87,7 +86,7 @@ class _loginPageState extends State<loginPage> {
                   ),
                 ),
                 CustomFormTextField(
-                  controller: emailController,
+                    controller: emailController,
                     onChanged: (value) {
                       email = value;
                     },
@@ -105,16 +104,13 @@ class _loginPageState extends State<loginPage> {
                     // FocusManager.instance.primaryFocus?.unfocus();
                     FocusScope.of(context).unfocus();
 
-
-                    if (formKey.currentState!.validate() && emailController.text.isNotEmpty && passwordController.text.isNotEmpty ) {
+                    if (formKey.currentState!.validate() && emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
                       setState(() {
                         isLoading = true;
                       });
 
                       try {
-                        UserCredential user = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: emailController.text, password: passwordController.text);
+                        UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
 
                         if (user.user != null) {
                           showSnackBar(context, 'success');
@@ -143,8 +139,7 @@ class _loginPageState extends State<loginPage> {
                         showSnackBar(context, error);
                       } on PlatformException catch (e) {
                         showSnackBar(context, e.toString());
-                      }
-                      catch (e) {
+                      } catch (e) {
                         showSnackBar(context, e.toString());
                       }
 
@@ -158,14 +153,12 @@ class _loginPageState extends State<loginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Don\'t have an account?',
-                        style: TextStyle(color: Colors.white)),
+                    const Text('Don\'t have an account?', style: TextStyle(color: Colors.white)),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, Register.id);
                       },
-                      child: const Text('Register',
-                          style: TextStyle(color: Colors.white)),
+                      child: const Text('Register', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 )
@@ -180,12 +173,11 @@ class _loginPageState extends State<loginPage> {
   Future<void> Login() async {}
 }
 
-extension Dev on String{
-  String? get dev{
-    if(kDebugMode){
-
-    return this;
-    }else{
+extension Dev on String {
+  String? get dev {
+    if (kDebugMode) {
+      return this;
+    } else {
       return null;
     }
   }

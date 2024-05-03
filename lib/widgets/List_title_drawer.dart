@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hajj_app/constants.dart';
 
 class ListTileDrawer extends StatelessWidget {
-   ListTileDrawer({super.key,required this.title,required this.icon, this.onTap});
+   ListTileDrawer({super.key,required this.title,required this.icon,required this.onTap});
 
   String? title;
   Icon? icon;

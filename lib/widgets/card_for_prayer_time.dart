@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class CardPrayerTime extends StatelessWidget {
-   CardPrayerTime({super.key,required this.prayerName,required this.prayerTime});
+   CardPrayerTime({super.key,required this.prayerName,required this.prayerTime,required this.prayerIcon});
 String prayerName;
 String prayerTime;
+IconData prayerIcon;
   @override
   Widget build(BuildContext context) {
 
@@ -32,7 +33,7 @@ String prayerTime;
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(WeatherIcons.day_sunny, color: Colors.orange, size: 20),
+                    child: Icon(prayerIcon, color: Colors.orange, size: 35),
                   ),
                
                   Padding(

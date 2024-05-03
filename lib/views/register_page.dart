@@ -43,7 +43,7 @@ class _RegisterState extends State<Register> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 120,),
+                  const SizedBox(height: 120,),
                  const CircleAvatar(
                   radius: 100.0,
                   //child: Image.asset('images/Hajj.png'),
@@ -75,6 +75,7 @@ class _RegisterState extends State<Register> {
                     height: 10,
                   ),
                   CustomFormTextField(
+                    controller: TextEditingController(),
                     onChanged: (value) {
                       email = value;
                     },
@@ -84,6 +85,7 @@ class _RegisterState extends State<Register> {
                     height: 10,
                   ),
                   CustomFormTextField(
+                    controller: TextEditingController(),
                     onChanged: (value) {
                       password = value;
                     },
@@ -93,6 +95,7 @@ class _RegisterState extends State<Register> {
                     height: 10,
                   ),
                   CustomFormTextField(
+                    controller: TextEditingController(),
                     onChanged: (value) {
                       confirmpassword = value;
                     },

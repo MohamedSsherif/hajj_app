@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hajj_app/firebase_options.dart';
 import 'package:hajj_app/helpers/read_doaa_json.dart';
+import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/doaa_body.dart';
 import 'package:hajj_app/views/home_body.dart';
@@ -36,6 +37,7 @@ class Hajj extends StatelessWidget {
         PrayerTimePage.id: (context) => PrayerTimePage(),
         ReadDoaaJson.id: (context) => ReadDoaaJson(path: 'assets/json/doaa.json'),
         TasbihPage.id: (context) => TasbihPage(),
+        EmergencyPage.id: (context) => EmergencyPage(),
         // HomeBody.id: (context) =>  HomeBody(),
         // DoaaBody.id: (context) =>  DoaaBody(),
       },

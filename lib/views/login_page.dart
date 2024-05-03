@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_snack_bar.dart';
 import 'package:hajj_app/views/home_page.dart';
@@ -14,6 +16,8 @@ class loginPage extends StatefulWidget {
 
   static String id = 'LoginPage';
 
+
+
   @override
   State<loginPage> createState() => _loginPageState();
 }
@@ -25,6 +29,16 @@ class _loginPageState extends State<loginPage> {
   bool isLoading = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
+  
+  late TextEditingController emailController; 
+  late TextEditingController passwordController; 
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController(text: "mohamed@gmail.com");
+    passwordController = TextEditingController(text: "12345678");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +49,7 @@ class _loginPageState extends State<loginPage> {
         //resizeToAvoidBottomInset: false,
         body: Form(
           key: formKey,
+          autovalidateMode: AutovalidateMode.always,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -48,6 +63,7 @@ class _loginPageState extends State<loginPage> {
                   backgroundImage: AssetImage('assets/images/Hajj.png'),
                   backgroundColor: Colors.white,
                 ),
+                const SizedBox(height: 10),
                 const Text(
                   'Muslim',
                   style: TextStyle(
@@ -70,11 +86,13 @@ class _loginPageState extends State<loginPage> {
                   ),
                 ),
                 CustomFormTextField(
+                  controller: emailController,
                     onChanged: (value) {
                       email = value;
                     },
                     labelText: 'Email'),
                 CustomFormTextField(
+                  controller: passwordController,
                   obscureText: true,
                   onChanged: (value) {
                     password = value;
@@ -83,33 +101,56 @@ class _loginPageState extends State<loginPage> {
                 ),
                 CustomButton(
                   onTap: () async {
-                    if (formKey.currentState!.validate()) {
+                    // FocusManager.instance.primaryFocus?.unfocus();
+                    FocusScope.of(context).unfocus();
+
+
+                    if (formKey.currentState!.validate() && email != null && password != null) {
                       setState(() {
                         isLoading = true;
                       });
 
                       try {
-                        await Login();
-                        showSnackBar(context, 'success');
-                        Navigator.pushNamed(context, HomePage.id);
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          showSnackBar(
-                              context, 'No user found for that email.');
-                        } else if (e.code == 'wrong-password') {
-                          showSnackBar(context,
-                              'Wrong password provided for that user.');
+                        UserCredential user = await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: email!, password: password!);
+
+                        if (user.user != null) {
+                          showSnackBar(context, 'success');
+                          Navigator.pushReplacementNamed(context, HomePage.id);
+                        } else {
+                          showSnackBar(context, "Wrong credentials");
                         }
-                      } catch (e) {
+                      } on FirebaseAuthException catch (e) {
+                        String error = "Error";
+                        switch (e.code) {
+                          case "network-request-failed":
+                            error = "Timeout";
+                            break;
+                          case "user-not-found":
+                            error = "USer not found";
+                            break;
+                          case "wrong-password":
+                            error = "Invalid credentials";
+                            break;
+
+                          default:
+                            error = "Something went worng!";
+                        }
+
+                        showSnackBar(context, error);
+                      } on PlatformException catch (e) {
                         showSnackBar(context, e.toString());
                       }
+                      catch (e) {
+                        showSnackBar(context, e.toString());
+                      }
+
                       setState(() {
                         isLoading = false;
                       });
                     }
-                   // Navigator.pushNamed(context, HomePage.id);
                   },
-                    
                   text: 'Sign In',
                 ),
                 Row(
@@ -134,8 +175,5 @@ class _loginPageState extends State<loginPage> {
     );
   }
 
-  Future<void> Login() async {
-    UserCredential user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email!, password: password!);
-  }
+  Future<void> Login() async {}
 }

@@ -74,10 +74,10 @@ class _View360State extends State<View360> {
                 onVideo360ViewCreated: _onVideo360ViewCreated,
                 url:
               
-                    'https://codetricity.github.io/flutter_video_display/ageda.MP4',
+                    'https://drive.google.com/uc?export=download&id=13gg7uDmOqVbKb6SnTtcsV57hnd0ZjQ6y',
                 onPlayInfo: (Video360PlayInfo info) {
                   setState(() {
-                    durationText = info.duration.toString();
+                    //durationText = info.duration.toString();
                     totalText = info.total.toString();
                   });
                 },

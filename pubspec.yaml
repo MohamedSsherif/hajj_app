@@ -46,8 +46,13 @@ dependencies:
   flutter_svg: ^2.0.10+1
   weather_icons: ^3.0.0
   video_player: ^2.8.3
+  adhan: ^2.0.0+1
   get: ^4.6.6
   video_360: ^0.0.9
+  geolocator: ^10.1.1
+  flutter_timezone: ^1.0.8
+  pray_times: ^0.0.1
+  url_launcher: ^6.2.6
 dev_dependencies:
   flutter_test:
     sdk: flutter

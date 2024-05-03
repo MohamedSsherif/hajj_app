@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hajj_app/constants.dart';
+import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/doaa_body.dart';
 import 'package:hajj_app/views/home_body.dart';
@@ -38,18 +39,18 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'قافلة المسلمين',
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(color: Colors.black, fontSize: 24),
                     ),
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 20,
-                    backgroundImage: AssetImage('assets/images/Hajj.png'),
+                    backgroundImage: AssetImage('assets/images/ji8.jpg'),
                   ),
                 ],
               ),
               centerTitle: true,
-              backgroundColor: KPrimaryColor,
+              backgroundColor: Color.fromARGB(255, 156, 149, 87),
             ),
            endDrawer: Drawer(
           child: ListView(
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 CircleAvatar(
                   backgroundColor: Colors.black,
                   radius: 50,
-                  backgroundImage: AssetImage('assets/images/OIP.jpeg'),
+                  backgroundImage: AssetImage('assets/images/ji8.jpg'),
                 ),
                 SizedBox(
                   height: 2,
@@ -106,6 +107,9 @@ class _HomePageState extends State<HomePage> {
           ListTileDrawer(
             title: 'المساعدة',
             icon: const Icon(Icons.help_center_outlined),
+            onTap: () {
+               Navigator.pushNamed(context, EmergencyPage.id);
+            },
           ),
         ],
       )),  

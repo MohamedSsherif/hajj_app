@@ -1,32 +1,47 @@
 import 'package:flutter/material.dart';
 
 class CustomFormTextField extends StatelessWidget {
-   CustomFormTextField({this.labelText, this.onChanged, this.obscureText=false});
+   const CustomFormTextField({super.key, this.labelText, this.onChanged, this.obscureText=false ,required  this.controller});
 
-String? labelText;
-Function(String)? onChanged;
-bool? obscureText;
+final String? labelText;
+final Function(String)? onChanged;
+final bool? obscureText;
+final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child:  TextFormField(
-        obscureText: obscureText!,
-         validator: (data){
-        if(data!.isEmpty){
-          return 'This field is required';
-        }
-      
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText ?? false,
+        validator: (data){
+          if((((data?.isEmpty) ?? false) && labelText == "email" && (data?.contains("@") ?? false))){
+            return 'This field is required';
+          }
+          return null;
+        },
         onChanged: onChanged,
         decoration: InputDecoration(
-          labelText: labelText,
-          contentPadding: EdgeInsets.only(left:10.0)
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.orange
+            ),
+          ),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+            )
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+          ),
+          hintText: labelText,
+          hintStyle: const TextStyle(color: Colors.white,),
         ),
-      ),
+        ),
     );
   }
 }

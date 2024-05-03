@@ -4,6 +4,7 @@
 // import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_snack_bar.dart';
 import 'package:hajj_app/widgets/custom_button.dart';
@@ -23,6 +24,26 @@ class _RegisterState extends State<Register> {
   String? email;
   String? confirmpassword;
   String? password;
+  late TextEditingController passwordController;
+  late TextEditingController confirmPasswordController;
+  late TextEditingController emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    
+    emailController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   bool isLoading = false;
 
@@ -34,22 +55,25 @@ class _RegisterState extends State<Register> {
       inAsyncCall: isLoading,
       child: Scaffold(
         backgroundColor: KPrimaryColor,
-       // resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             key: formKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 120,),
-                 const CircleAvatar(
-                  radius: 100.0,
-                  //child: Image.asset('images/Hajj.png'),
-                  backgroundImage: AssetImage('assets/images/Hajj.png'),
-                  backgroundColor: Colors.white,
-                ),
+                  const SizedBox(
+                    height: 120,
+                  ),
+                  const CircleAvatar(
+                    radius: 100.0,
+                    //child: Image.asset('images/Hajj.png'),
+                    backgroundImage: AssetImage('assets/images/Hajj.png'),
+                    backgroundColor: Colors.white,
+                  ),
                   const Text(
                     'muslim',
                     style: TextStyle(
@@ -70,12 +94,12 @@ class _RegisterState extends State<Register> {
                       ],
                     ),
                   ),
-              
+
                   const SizedBox(
                     height: 10,
                   ),
                   CustomFormTextField(
-                    controller: TextEditingController(),
+                    controller: emailController,
                     onChanged: (value) {
                       email = value;
                     },
@@ -85,7 +109,7 @@ class _RegisterState extends State<Register> {
                     height: 10,
                   ),
                   CustomFormTextField(
-                    controller: TextEditingController(),
+                    controller: passwordController,
                     onChanged: (value) {
                       password = value;
                     },
@@ -95,7 +119,7 @@ class _RegisterState extends State<Register> {
                     height: 10,
                   ),
                   CustomFormTextField(
-                    controller: TextEditingController(),
+                    controller: confirmPasswordController,
                     onChanged: (value) {
                       confirmpassword = value;
                     },
@@ -106,7 +130,7 @@ class _RegisterState extends State<Register> {
                   ),
                   CustomButton(
                       onTap: () async {
-                        if (formKey.currentState!.validate()) {
+                        if (isValid()) {
                           setState(() {
                             isLoading = true;
                           });
@@ -115,8 +139,8 @@ class _RegisterState extends State<Register> {
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               // ignore: use_build_context_synchronously
-                              showSnackBar(
-                                  context, 'The password provided is too weak.');
+                              showSnackBar(context,
+                                  'The password provided is too weak.');
                             } else if (e.code == 'email-already-in-use') {
                               // ignore: use_build_context_synchronously
                               showSnackBar(context,
@@ -128,12 +152,11 @@ class _RegisterState extends State<Register> {
                           setState(() {
                             isLoading = false;
                           });
-                          
+
                           showSnackBar(context, 'Account created successfully');
-                           Navigator.pop(context, 'LoginPage');
-                          
-                        }
-                        
+                          Navigator.pop(context, 'LoginPage');
+                        }else{
+                          showSnackBar(context, 'Password does not match');}
                       },
                       text: 'Sign Up'),
                   const SizedBox(
@@ -162,10 +185,16 @@ class _RegisterState extends State<Register> {
     );
   }
 
- 
-
   Future<void> Auth() async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);
+  }
+
+  bool isValid() {
+    if((passwordController.text == confirmPasswordController.text) && (formKey.currentState?.validate() ?? false)){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

@@ -99,15 +99,17 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
                         // height: MediaQuery.of(context).size.height * 0.05,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            ayatList[currentIndex].text,
-                            style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                height: 1.5),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
+                          child: Center(
+                            child: Text(
+                              ayatList[currentIndex].text,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.5),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                            ),
                           ),
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -36,8 +37,8 @@ class _loginPageState extends State<loginPage> {
   @override
   void initState() {
     super.initState();
-    emailController = TextEditingController(text: "mohamed@gmail.com");
-    passwordController = TextEditingController(text: "12345678");
+    emailController = TextEditingController(text: "mohamed@gmail.com".dev);
+    passwordController = TextEditingController(text: "12345678".dev);
   }
 
   @override
@@ -105,7 +106,7 @@ class _loginPageState extends State<loginPage> {
                     FocusScope.of(context).unfocus();
 
 
-                    if (formKey.currentState!.validate() && email != null && password != null) {
+                    if (formKey.currentState!.validate() && emailController.text.isNotEmpty && passwordController.text.isNotEmpty ) {
                       setState(() {
                         isLoading = true;
                       });
@@ -113,7 +114,7 @@ class _loginPageState extends State<loginPage> {
                       try {
                         UserCredential user = await FirebaseAuth.instance
                             .signInWithEmailAndPassword(
-                                email: email!, password: password!);
+                                email: emailController.text, password: passwordController.text);
 
                         if (user.user != null) {
                           showSnackBar(context, 'success');
@@ -131,6 +132,7 @@ class _loginPageState extends State<loginPage> {
                             error = "USer not found";
                             break;
                           case "wrong-password":
+                          case "invalid-credential":
                             error = "Invalid credentials";
                             break;
 
@@ -176,4 +178,15 @@ class _loginPageState extends State<loginPage> {
   }
 
   Future<void> Login() async {}
+}
+
+extension Dev on String{
+  String? get dev{
+    if(kDebugMode){
+
+    return this;
+    }else{
+      return null;
+    }
+  }
 }

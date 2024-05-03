@@ -4,8 +4,6 @@ import 'package:hajj_app/firebase_options.dart';
 import 'package:hajj_app/helpers/read_doaa_json.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
-import 'package:hajj_app/views/doaa_body.dart';
-import 'package:hajj_app/views/home_body.dart';
 import 'package:hajj_app/views/home_page.dart';
 import 'package:hajj_app/views/login_page.dart';
 import 'package:hajj_app/views/prayer_time.dart';
@@ -31,12 +29,12 @@ class Hajj extends StatelessWidget {
       routes: {
         loginPage.id: (context) => loginPage(),
         Register.id: (context) => Register(),
-        HomePage.id: (context) => HomePage(),
-        QuiblahPage.id: (context) => QuiblahPage(),
+        HomePage.id: (context) => const HomePage(),
+        QuiblahPage.id: (context) => const QuiblahPage(),
         AzkarPage.id: (context) => AzkarPage(),
         PrayerTimePage.id: (context) => PrayerTimePage(),
         ReadDoaaJson.id: (context) => ReadDoaaJson(path: 'assets/json/doaa.json'),
-        TasbihPage.id: (context) => TasbihPage(),
+        TasbihPage.id: (context) => const TasbihPage(),
         EmergencyPage.id: (context) => EmergencyPage(),
         // HomeBody.id: (context) =>  HomeBody(),
         // DoaaBody.id: (context) =>  DoaaBody(),

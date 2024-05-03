@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/models/doaa_model.dart';
-import 'package:hajj_app/views/doaa_body.dart';
 
 class ReadDoaaJson extends StatefulWidget {
   static const String id = 'read_doaa_json';
@@ -62,13 +61,11 @@ class _ReadDoaaJsonState extends State<ReadDoaaJson> {
                                     25.0,
                                   )),
                               child: IconButton(
-                                icon: const Icon(Icons.play_arrow,
-                                    color: Colors.orange, size: 35),
+                                icon: const Icon(Icons.play_arrow, color: Colors.orange, size: 35),
                                 onPressed: () {
                                   try {
                                     final player = AudioPlayer();
-                                    player.play(
-                                        AssetSource('${doaa[index].audio}'));
+                                    player.play(AssetSource('${doaa[index].audio}'));
                                   } catch (e) {
                                     print(e);
                                   }

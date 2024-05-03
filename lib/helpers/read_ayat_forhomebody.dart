@@ -16,6 +16,8 @@ class ReadAyatForHomeBody extends StatefulWidget {
 class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
   List<AyatModel> ayatList = [];
   int currentIndex = 0;
+
+  late Timer timer;
   @override
   void initState() {
     super.initState();
@@ -38,11 +40,18 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
   }
 
   void startRotation() {
-    Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+    timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       setState(() {
         currentIndex = (currentIndex + 1) % ayatList.length;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+
+    super.dispose();
   }
 
   @override
@@ -102,11 +111,7 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
                           child: Center(
                             child: Text(
                               ayatList[currentIndex].text,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.5),
+                              style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold, height: 1.5),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
                             ),

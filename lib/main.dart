@@ -27,13 +27,14 @@ class Hajj extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        LoginPage.id: (context) => LoginPage(),
+        LoginPage.id: (context) => const LoginPage(),
         Register.id: (context) => Register(),
         HomePage.id: (context) => const HomePage(),
         QuiblahPage.id: (context) => const QuiblahPage(),
         AzkarPage.id: (context) => AzkarPage(),
         PrayerTimePage.id: (context) => PrayerTimePage(),
-        ReadDoaaJson.id: (context) => ReadDoaaJson(path: 'assets/json/doaa.json'),
+        ReadDoaaJson.id: (context) =>
+            ReadDoaaJson(path: 'assets/json/doaa.json'),
         TasbihPage.id: (context) => const TasbihPage(),
         EmergencyPage.id: (context) => EmergencyPage(),
         // HomeBody.id: (context) =>  HomeBody(),

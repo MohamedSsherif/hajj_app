@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CustomContainerForZeham extends StatelessWidget {
    CustomContainerForZeham({super.key, required this.text1, required this.text2});
@@ -17,13 +18,16 @@ String text2;
               text2,
               style: TextStyle(fontSize: 15, color: Colors.black),
             ),
-            Expanded(
-              child: Divider(
-                color: Colors.red,
-                thickness: 3,
-                indent: 20.0,
-                endIndent: 20.0,
-              ),
+              Expanded(
+             child: LinearPercentIndicator(
+                        animation: true,
+                        animationDuration: 1000,
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        lineHeight: 5.0,
+                        percent: 0.4 ,
+                        //center: Text("100%"),
+                        progressColor: Color(0xff56A8A9),
+                      ),
             ),
             Text(
               text1,

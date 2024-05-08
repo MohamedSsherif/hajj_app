@@ -101,7 +101,7 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
                   ayatList = snapshot.data!;
                   return Center(
                     child: Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.035, bottom: 8.0),
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.055, bottom: 8.0),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * .7,
                         // height: MediaQuery.of(context).size.height * 0.05,

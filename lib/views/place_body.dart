@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hajj_app/helpers/video_player_360.dart';
+import 'package:hajj_app/services/video_player_360.dart';
+import 'package:hajj_app/widgets/container_for_360.dart';
 import 'package:hajj_app/widgets/custom_button.dart';
 import 'package:video_360/video_360.dart';
 
@@ -31,17 +32,64 @@ class _PlaceBodyState extends State<PlaceBody> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Video 360 Plugin example app'),
+        automaticallyImplyLeading: true,
+        title: const Text('الأماكن المقدسة', style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+        centerTitle: true,
       ),
-       body: TextButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: ((context) => View360())));
-        },
-        child: Text('360 View'))
-      );
+       body: SingleChildScrollView(
+         child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container360(
+                backgroundImage: AssetImage('assets/images/OIP.jpeg'),
+                text: 'الكعبة',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => View360()),
+                  );
+                },
+              ),
+              Container360(
+                backgroundImage: AssetImage('assets/images/maxresdefault.webp'),
+                text: 'المسجد النبوي',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => View360()),
+                  );
+                },
+              ),
+              Container360(
+                backgroundImage: AssetImage('assets/images/maxresdefault.webp'),
+                text: 'منى',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => View360()),
+                  );
+                },
+              ),
+              Container360(
+                backgroundImage: AssetImage('assets/images/maxresdefault.webp'),
+                text: 'جبل عرفة',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => View360()),
+                  );
+                },
+              ),
+            ],
+          ),
+               ),
+       ),
+    );
   }
 }
+    
   
 //       body: Stack(
 //         children: [
@@ -134,25 +182,5 @@ class _PlaceBodyState extends State<PlaceBody> {
 //   _onVideo360ViewCreated(Video360Controller? controller) {
 //     this.controller = controller;
 //     this.controller?.play();
-//   }
-// }
-
-
-
-// import 'package:flutter/material.dart';
-
-// class PlaceBody extends StatelessWidget {
-//   static const String id = 'place_body';
-//   const PlaceBody({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         body: const Center(
-//           child: Text('Place Body'),
-//         )
-
-//     );
-    
 //   }
 // }

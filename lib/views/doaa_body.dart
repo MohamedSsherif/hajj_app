@@ -15,6 +15,7 @@ class _DoaaBodyState extends State<DoaaBody> {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
 
+  @override
   void initState() {
     _controller =
         VideoPlayerController.asset("flutter_assets/videos/video.mp4");
@@ -25,6 +26,7 @@ class _DoaaBodyState extends State<DoaaBody> {
     super.initState();
   }
 
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -33,7 +35,6 @@ class _DoaaBodyState extends State<DoaaBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // appBar: AppBar(automaticallyImplyLeading: false,),
         body: FutureBuilder(
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
@@ -41,10 +42,10 @@ class _DoaaBodyState extends State<DoaaBody> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text('فيديو لتوضيح اهميه الدعاء وادابه.',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

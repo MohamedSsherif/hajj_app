@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/models/doaa_model.dart';
 
+// ignore: must_be_immutable
 class ReadDoaaJson extends StatefulWidget {
   static const String id = 'read_doaa_json';
   ReadDoaaJson({super.key, required this.path});
@@ -65,7 +66,7 @@ class _ReadDoaaJsonState extends State<ReadDoaaJson> {
                                 onPressed: () {
                                   try {
                                     final player = AudioPlayer();
-                                    player.play(AssetSource('${doaa[index].audio}'));
+                                    player.play(AssetSource(doaa[index].audio));
                                   } catch (e) {
                                     print(e);
                                   }

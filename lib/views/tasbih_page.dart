@@ -11,14 +11,17 @@ class TasbihPage extends StatefulWidget {
 class _TasbihPageState extends State<TasbihPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: BackgroundWithCounter(),
     );
   }
 }
 
 class BackgroundWithCounter extends StatefulWidget {
+  const BackgroundWithCounter({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _BackgroundWithCounterState createState() => _BackgroundWithCounterState();
 }
 
@@ -47,9 +50,9 @@ class _BackgroundWithCounterState extends State<BackgroundWithCounter> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('التسبيح ', style: TextStyle(color: Colors.black, fontSize: 24),),
+        title: const Text('التسبيح ', style: TextStyle(color: Colors.black, fontSize: 24),),
         centerTitle: true,
-        backgroundColor: Color(0xff51B1E3),
+        backgroundColor: const Color(0xff51B1E3),
         
         
       ),
@@ -69,13 +72,13 @@ class _BackgroundWithCounterState extends State<BackgroundWithCounter> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                    style: ButtonStyle(),
+                    style: const ButtonStyle(),
                     onPressed: _resetCounter,
-                    child: Text('Reset'),
+                    child: const Text('Reset'),
                   ),
                   Text(
                     'Loop $_loops',
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ],
               ),
@@ -100,7 +103,7 @@ class _BackgroundWithCounterState extends State<BackgroundWithCounter> {
                         padding: const EdgeInsets.all(32.0),
                         child: Text(
                           '$_counter',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 40.0,
                             color: Colors.white,
                           ),
@@ -108,11 +111,11 @@ class _BackgroundWithCounterState extends State<BackgroundWithCounter> {
                       ),
                       ElevatedButton(
                         onPressed: _incrementCounter,
-                        child: Text('Tap here to begin tasbih'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           foregroundColor: Colors.white,
                         ),
+                        child: const Text('Tap here to begin tasbih'),
                       ),
                     ],
                   ),

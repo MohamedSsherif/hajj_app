@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_icons/weather_icons.dart';
 
+
+// ignore: must_be_immutable
 class CardPrayerTime extends StatelessWidget {
    CardPrayerTime({super.key,required this.prayerName,required this.prayerTime,required this.prayerIcon});
 String prayerName;
@@ -17,7 +18,7 @@ IconData prayerIcon;
               blurRadius: 50,
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 0,
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -42,26 +43,23 @@ IconData prayerIcon;
                       children: [
                         Text(
                           prayerName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 18,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           prayerTime,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  // SizedBox(
-                  //   width: 20,
-                  // ),
                 ],
               ),
             ),

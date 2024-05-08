@@ -15,10 +15,9 @@ class _QuiblahPageState extends State<QuiblahPage> {
 
   @override
   Widget build(BuildContext context) {
-    darkTheme:
     ThemeData.dark().copyWith(
         colorScheme:
-            ColorScheme.fromSwatch().copyWith(secondary: Color(0xffecce6d)));
+            ColorScheme.fromSwatch().copyWith(secondary: const Color(0xffecce6d)));
     return Scaffold(
       appBar: AppBar(
         title: const Text("اتجاه القبله"),
@@ -27,19 +26,22 @@ class _QuiblahPageState extends State<QuiblahPage> {
       body: FutureBuilder(
         future: _deviceSupport,
         builder: (_, AsyncSnapshot<bool?> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting)
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          if (snapshot.hasError)
+          }
+          if (snapshot.hasError) {
             return Center(
               child: Text("Error: ${snapshot.error.toString()}"),
             );
+          }
 
-          if (snapshot.data!)
-            return QiblaCompass();
-          else
-            return Center(
+          if (snapshot.data!) {
+            return const QiblaCompass();
+          } else {
+            return const Center(
               child: Text("Device not supported"),
             );
+          }
         },
       ),
     );

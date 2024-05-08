@@ -1,14 +1,16 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyPage extends StatelessWidget {
   static const String id = 'EmergencyPage';
+
+  const EmergencyPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Emergency Contacts'),
+        title: const Text('Emergency Contacts'),
       ),
 
        body: EmergencyPageBody(),
@@ -27,9 +29,13 @@ class EmergencyPageBody extends StatelessWidget {
     },
   ];
 
+   EmergencyPageBody({super.key});
+
   Future<void> _launchCall(String number) async {
     final url = 'tel:$number';
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';
@@ -41,7 +47,7 @@ class EmergencyPageBody extends StatelessWidget {
     return Scaffold(
       
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: emergencyContacts.map((contact) {
@@ -66,7 +72,7 @@ class EmergencyContactCard extends StatelessWidget {
   final IconData icon;
   final Function() onPressed;
 
-  EmergencyContactCard({
+  const EmergencyContactCard({super.key, 
     required this.title,
     required this.phoneNumber,
     required this.icon,

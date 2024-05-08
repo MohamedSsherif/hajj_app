@@ -1,10 +1,5 @@
-// import 'package:chat_app/constants.dart';
-// import 'package:chat_app/helpers/show_snack_bar.dart';
-// import 'package:chat_app/widgets/custom_button.dart';
-// import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_snack_bar.dart';
 import 'package:hajj_app/widgets/custom_button.dart';
@@ -12,7 +7,7 @@ import 'package:hajj_app/widgets/custom_text_field.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Register extends StatefulWidget {
-  Register({super.key});
+  const Register({super.key});
 
   static String id = 'RegisterPage';
 
@@ -147,13 +142,15 @@ class _RegisterState extends State<Register> {
                                   'The account already exists for that email.');
                             }
                           } catch (e) {
+                            // ignore: use_build_context_synchronously
                             showSnackBar(context, 'there was an error');
                           }
                           setState(() {
                             isLoading = false;
                           });
-
+                          // ignore: use_build_context_synchronously
                           showSnackBar(context, 'Account created successfully');
+                          // ignore: use_build_context_synchronously
                           Navigator.pop(context, 'LoginPage');
                         }else{
                           showSnackBar(context, 'Password does not match');}
@@ -185,6 +182,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future<void> Auth() async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);

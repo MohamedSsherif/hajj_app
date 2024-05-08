@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/models/hajj_model.dart';
 
+// ignore: must_be_immutable
 class ReadHajjJson extends StatefulWidget {
   ReadHajjJson({super.key, required this.path});
   String path;
@@ -28,7 +29,7 @@ class _ReadHajjJsonState extends State<ReadHajjJson> {
                   .width, // Set container width to match the screen width
               height: MediaQuery.of(context).size.height *
                   0.6, // Set container height to 50% of the screen height
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/636701576937052201.jpg'),
                   fit: BoxFit.cover,
@@ -42,12 +43,12 @@ class _ReadHajjJsonState extends State<ReadHajjJson> {
                 if (snapshot.hasData) {
                   List<HajjModel> hajj = snapshot.data as List<HajjModel>;
                   return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: hajj.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Card(
                           color: KPrimaryColor,
                           child: Padding(
@@ -60,7 +61,7 @@ class _ReadHajjJsonState extends State<ReadHajjJson> {
                                     textAlign: TextAlign.right,
                                     "  خطوه:  ${hajj[index].name}",
                                     style:
-                                        TextStyle(fontSize: 18, color: Colors.white),
+                                        const TextStyle(fontSize: 18, color: Colors.white),
                                   ),
                                 ),
                                 Padding(

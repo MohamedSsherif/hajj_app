@@ -4,14 +4,17 @@ import 'package:hajj_app/helpers/readazkarjson.dart';
 
 class AzkarPage extends StatefulWidget {
   static String id = 'AzkarPage';
+
+  const AzkarPage({super.key});
   @override
+  // ignore: library_private_types_in_public_api
   _AzkarPageState createState() => _AzkarPageState();
 }
 
 class _AzkarPageState extends State<AzkarPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
- // List _items = [];
+
 
   @override
   void initState() {
@@ -29,7 +32,7 @@ class _AzkarPageState extends State<AzkarPage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'الاذكار',
           ),
           centerTitle: true,
@@ -58,10 +61,10 @@ class _AzkarPageState extends State<AzkarPage>
                   ),
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.black,
-                  tabs: [
+                  tabs: const [
                     // first tab [you can add an icon using the icon property]
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Tab(
                         text: 'اذكار الصباح',
                       ),
@@ -69,13 +72,13 @@ class _AzkarPageState extends State<AzkarPage>
 
                     // second tab [you can add an icon using the icon property]
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Tab(
                         text: 'اذكار المساء',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Tab(
                         text: 'اذكار بعد الصلاه',
                       ),

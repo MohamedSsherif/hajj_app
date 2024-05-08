@@ -6,6 +6,7 @@ import 'package:hajj_app/constants.dart';
 
 import 'package:hajj_app/models/azkar_model.dart';
 
+// ignore: must_be_immutable
 class ReadAzkarJson extends StatefulWidget {
   ReadAzkarJson({super.key, required this.path});
   String path;
@@ -26,7 +27,7 @@ class _ReadAzkarJsonState extends State<ReadAzkarJson> {
               itemCount: azkar.length,
               itemBuilder: (context, index) {
                 return Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Card(
                     color: KPrimaryColor,
                     child: Padding(
@@ -38,7 +39,7 @@ class _ReadAzkarJsonState extends State<ReadAzkarJson> {
                             child: Text(
                               textAlign: TextAlign.right,
                               "  الذكر:  ${azkar[index].zekr}",
-                              style: TextStyle(fontSize: 18, color: Colors.white),
+                              style: const TextStyle(fontSize: 18, color: Colors.white),
                             ),
                           ),
                           Row(

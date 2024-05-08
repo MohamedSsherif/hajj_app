@@ -17,9 +17,9 @@ class Container360 extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.all(10),
-        width: 380,
-        height: 170,
+        margin: const EdgeInsets.all(10),
+        width: MediaQuery.of(context).size.width * 1,
+        height: MediaQuery.of(context).size.height * 0.25,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -33,23 +33,21 @@ class Container360 extends StatelessWidget {
               bottom: 0,
               right: 0,
               child: Container(
-                child: Container(
-                  height: 40,
-                  width: 220,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/—Pngtree—creative text box_5509741.png'),
-                      fit: BoxFit.cover,
-                    ),
+                height: 40,
+                width: 220,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'assets/images/—Pngtree—creative text box_5509741.png'),
+                    fit: BoxFit.cover,
                   ),
-                  child: Center(
-                    child: Text(
-                      text,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
+                ),
+                child: Center(
+                  child: Text(
+                    text,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
                     ),
                   ),
                 ),

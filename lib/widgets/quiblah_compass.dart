@@ -121,12 +121,14 @@ class QiblahCompassWidget extends StatelessWidget {
             Transform.rotate(
               angle: angle,
               child: SvgPicture.asset('assets/images/5.svg', // compass
+                  // ignore: deprecated_member_use
                   color: platformBrightness == Brightness.dark
                       ? Colors.yellow
                       : KPrimaryColor),
             ),
             _kaabaSvg,
             SvgPicture.asset('assets/images/3.svg', //needle
+                // ignore: deprecated_member_use
                 color: platformBrightness == Brightness.dark
                     ? Colors.yellow
                     : KPrimaryColor),

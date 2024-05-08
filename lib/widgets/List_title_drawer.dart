@@ -1,6 +1,8 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:hajj_app/constants.dart';
 
+// ignore: must_be_immutable
 class ListTileDrawer extends StatelessWidget {
    ListTileDrawer({super.key,required this.title,required this.icon,required this.onTap});
 

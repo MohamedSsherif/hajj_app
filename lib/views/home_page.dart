@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 centerTitle: true,
-                backgroundColor: Color.fromARGB(255, 156, 149, 87),
+                backgroundColor: const Color.fromARGB(255, 156, 149, 87),
               ),
         endDrawer: Drawer(
             child: ListView(
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
           const HomeBody(),
           const DoaaBody(),
           const MnaskBody(),
-          PlaceBody(),
+          const PlaceBody(),
         ][currentPageIndex]);
   }
 }

@@ -28,17 +28,14 @@ class Hajj extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         LoginPage.id: (context) => const LoginPage(),
-        Register.id: (context) => Register(),
+        Register.id: (context) => const Register(),
         HomePage.id: (context) => const HomePage(),
         QuiblahPage.id: (context) => const QuiblahPage(),
-        AzkarPage.id: (context) => AzkarPage(),
+        AzkarPage.id: (context) => const AzkarPage(),
         PrayerTimePage.id: (context) => PrayerTimePage(),
-        ReadDoaaJson.id: (context) =>
-            ReadDoaaJson(path: 'assets/json/doaa.json'),
+        ReadDoaaJson.id: (context) => ReadDoaaJson(path: 'assets/json/doaa.json'),
         TasbihPage.id: (context) => const TasbihPage(),
-        EmergencyPage.id: (context) => EmergencyPage(),
-        // HomeBody.id: (context) =>  HomeBody(),
-        // DoaaBody.id: (context) =>  DoaaBody(),
+        EmergencyPage.id: (context) => const EmergencyPage(),
       },
       initialRoute: LoginPage.id,
     );

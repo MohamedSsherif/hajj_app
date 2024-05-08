@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hajj_app/services/video_player_360.dart';
 import 'package:hajj_app/widgets/container_for_360.dart';
-import 'package:hajj_app/widgets/custom_button.dart';
 import 'package:video_360/video_360.dart';
 
 class PlaceBody extends StatefulWidget {
+  const PlaceBody({super.key});
+
  //static const String id = 'place_body';
   @override
+  // ignore: library_private_types_in_public_api
   _PlaceBodyState createState() => _PlaceBodyState();
 }
 
@@ -24,12 +26,6 @@ class _PlaceBodyState extends State<PlaceBody> {
 
   @override
   Widget build(BuildContext context) {
-
-    var statusBar = MediaQuery.of(context).padding.top;
-
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -43,42 +39,42 @@ class _PlaceBodyState extends State<PlaceBody> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container360(
-                backgroundImage: AssetImage('assets/images/OIP.jpeg'),
+                backgroundImage: const AssetImage('assets/images/OIP.jpeg'),
                 text: 'الكعبة',
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => View360()),
+                    MaterialPageRoute(builder: (context) => const View360()),
                   );
                 },
               ),
               Container360(
-                backgroundImage: AssetImage('assets/images/maxresdefault.webp'),
+                backgroundImage: const AssetImage('assets/images/photo_2024-05-01_20-09-21 (2).jpg'),
                 text: 'المسجد النبوي',
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => View360()),
+                    MaterialPageRoute(builder: (context) => const View360()),
                   );
                 },
               ),
               Container360(
-                backgroundImage: AssetImage('assets/images/maxresdefault.webp'),
+                backgroundImage: const AssetImage('assets/images/ph.jpg'),
                 text: 'منى',
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => View360()),
+                    MaterialPageRoute(builder: (context) => const View360()),
                   );
                 },
               ),
               Container360(
-                backgroundImage: AssetImage('assets/images/maxresdefault.webp'),
+                backgroundImage: const AssetImage('assets/images/arafaa.jpg'),
                 text: 'جبل عرفة',
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => View360()),
+                    MaterialPageRoute(builder: (context) => const View360()),
                   );
                 },
               ),
@@ -89,98 +85,4 @@ class _PlaceBodyState extends State<PlaceBody> {
     );
   }
 }
-    
   
-//       body: Stack(
-//         children: [
-//           Center(
-//             child: Container(
-//               width: width,
-//               height: height,
-//               child: Video360View(
-//                 onVideo360ViewCreated: _onVideo360ViewCreated,
-//                url: "flutter_assets/videos/elmasged-elnabawy.mp4",
-//                // url: 'https://bitmovin-a.akamaihd.net/content/playhouse-vr/m3u8s/105560.m3u8',
-//                 onPlayInfo: (Video360PlayInfo info) {
-//                   setState(() {
-//                     durationText = info.duration.toString();
-//                     totalText = info.total.toString();
-//                   });
-//                 },
-//               ),
-//             ),
-//           ),
-//           Column(
-//             children: [
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: [
-//                   MaterialButton(
-//                     onPressed: () {
-//                       controller?.play();
-//                     },
-//                     color: Colors.grey[100],
-//                     child: Text('Play'),
-//                   ),
-//                   MaterialButton(
-//                     onPressed: () {
-//                       controller?.stop();
-//                     },
-//                     color: Colors.grey[100],
-//                     child: Text('Stop'),
-//                   ),
-//                   MaterialButton(
-//                     onPressed: () {
-//                       controller?.reset();
-//                     },
-//                     color: Colors.grey[100],
-//                     child: Text('Reset'),
-//                   ),
-//                   MaterialButton(
-//                     onPressed: () {
-//                       controller?.jumpTo(80000);
-//                     },
-//                     color: Colors.grey[100],
-//                     child: Text('1:20'),
-//                   ),
-//                 ],
-//               ),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: [
-//                   MaterialButton(
-//                     onPressed: () {
-//                       controller?.seekTo(-2000);
-//                     },
-//                     color: Colors.grey[100],
-//                     child: Text('<<'),
-//                   ),
-//                   MaterialButton(
-//                     onPressed: () {
-//                       controller?.seekTo(2000);
-//                     },
-//                     color: Colors.grey[100],
-//                     child: Text('>>'),
-//                   ),
-//                   Flexible(
-//                     child: MaterialButton(
-//                       onPressed: () {
-//                       },
-//                       color: Colors.grey[100],
-//                       child: Text(durationText + ' / ' + totalText),
-//                     ),
-//                   ),
-//                 ],
-//               )
-//             ],
-//           )
-//         ],
-//       ),
-//     );
-//   }
-
-//   _onVideo360ViewCreated(Video360Controller? controller) {
-//     this.controller = controller;
-//     this.controller?.play();
-//   }
-// }

@@ -57,7 +57,6 @@ class _View360State extends State<View360> {
   String totalText = '';
   @override
   Widget build(BuildContext context) {
-    var statusBar = MediaQuery.of(context).padding.top;
 
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
@@ -67,7 +66,7 @@ class _View360State extends State<View360> {
       body: Stack(
         children: [
           Center(
-            child: Container(
+            child: SizedBox(
               width: width,
               height: height,
               child: Video360View(
@@ -94,21 +93,21 @@ class _View360State extends State<View360> {
                       controller.play();
                     },
                     color: Colors.grey[100],
-                    child: Text('Play'),
+                    child: const Text('Play'),
                   ),
                   MaterialButton(
                     onPressed: () {
                       controller.stop();
                     },
                     color: Colors.grey[100],
-                    child: Text('Stop'),
+                    child: const Text('Stop'),
                   ),
                   MaterialButton(
                     onPressed: () {
                       controller.reset();
                     },
                     color: Colors.grey[100],
-                    child: Text('Reset'),
+                    child: const Text('Reset'),
                   ),
                 ],
               )

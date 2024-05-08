@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hajj_app/constants.dart';
-import 'package:hajj_app/models/hajj_model.dart';
 import 'package:hajj_app/models/umrah_model.dart';
 
+// ignore: must_be_immutable
 class ReadUmrahJson extends StatefulWidget {
   ReadUmrahJson({super.key, required this.path});
   String path;
@@ -30,7 +30,7 @@ class _ReadUmrahJsonState extends State<ReadUmrahJson> {
                   .width, // Set container width to match the screen width
               height: MediaQuery.of(context).size.height *
                   0.3, // Set container height to 50% of the screen height
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/R.png'),
                   fit: BoxFit.cover,
@@ -45,12 +45,12 @@ class _ReadUmrahJsonState extends State<ReadUmrahJson> {
                 if (snapshot.hasData) {
                   List<UmrahModel> umrah = snapshot.data as List<UmrahModel>;
                   return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                      shrinkWrap: true,
                     itemCount: umrah.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Card(
                           color: KPrimaryColor,
                           child: Padding(
@@ -63,7 +63,7 @@ class _ReadUmrahJsonState extends State<ReadUmrahJson> {
                                     textAlign: TextAlign.right,
                                     "  خطوه:  ${umrah[index].name}",
                                     style:
-                                        TextStyle(fontSize: 18, color: Colors.white),
+                                        const TextStyle(fontSize: 18, color: Colors.white),
                                   ),
                                 ),
                                 Padding(

@@ -77,26 +77,25 @@ class _HomeBodyState extends State<HomeBody> {
           const SizedBox(height: 10),
           const ReadAyatForHomeBody(path: 'assets/json/ayat.json'),
           const SizedBox(height: 10),
-          prayerTimeService.prayerTimes.isEmpty
-              ? FutureBuilder(
-                  future: prayerTimeService.getPrayersTimes(),
+           FutureBuilder(
+                  future: prayerTimeService.getCurrentPrayerTime(),
                   builder: (context, snapshot) => CustomContainer(
                       image: 'assets/images/NextPrayer2.jpg',
                       text: '~الصلاه القادمهّ~',
                       // prayerName: 'العصر',
                       prayerName: snapshot.hasData
-                          ? prayerTimeService.prayerTimes[0]
+                          ? snapshot.data?.name ?? ""
                           : "",
-                      remainingTime: 'الوقت المتبقي 2:30',
+                      remainingTime: 'الوقت المتبقي ${snapshot.data?.timeDifference}',
                       text2: ' اضغط هنا لمعرفه مواقيت الصلاه'),
-                )
-              : CustomContainer(
-                  image: 'assets/images/NextPrayer2.jpg',
-                  text: '~الصلاه القادمهّ~',
-                  // prayerName: 'العصر',
-                  prayerName: prayerTimeService.prayerTimes[0],
-                  remainingTime: 'الوقت المتبقي 2:30',
-                  text2: ' اضغط هنا لمعرفه مواقيت الصلاه'),
+                ),
+              // : CustomContainer(
+              //     image: 'assets/images/NextPrayer2.jpg',
+              //     text: '~الصلاه القادمهّ~',
+              //     // prayerName: 'العصر',
+              //     prayerName: prayerTimeService.prayerTimes[0],
+              //     remainingTime: 'الوقت المتبقي 2:30',
+              //     text2: ' اضغط هنا لمعرفه مواقيت الصلاه'),
           const SizedBox(
             width: 5,
           )

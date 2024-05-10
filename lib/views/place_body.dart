@@ -28,7 +28,7 @@ class _PlaceBodyState extends State<PlaceBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        //automaticallyImplyLeading: true,
         title: const Text('الأماكن المقدسة', style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
             ),
         centerTitle: true,
@@ -44,7 +44,10 @@ class _PlaceBodyState extends State<PlaceBody> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const View360()),
+                    MaterialPageRoute(builder: (context) =>  View360(
+                      path: 'https://drive.google.com/uc?export=download&id=1cnlQ5-mySy3rahAwBcOJb-W2fryoWXJF',
+                      //https://drive.google.com/uc?export=download&id=1upvVpAYkXBfCL-sonUV2vpqbHVrgQXEw
+                    )),
                   );
                 },
               ),
@@ -54,7 +57,9 @@ class _PlaceBodyState extends State<PlaceBody> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const View360()),
+                    MaterialPageRoute(builder: (context) =>  View360(
+                      path: 'https://drive.google.com/uc?export=download&id=1FylAnE84GRu8WNM0gKO_wQOJsgVOK6Fu',
+                    )),
                   );
                 },
               ),
@@ -64,7 +69,9 @@ class _PlaceBodyState extends State<PlaceBody> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const View360()),
+                    MaterialPageRoute(builder: (context) =>  View360(
+                      path: 'https://drive.google.com/file/d/1upvVpAYkXBfCL-sonUV2vpqbHVrgQXEw/view?usp=sharing',
+                    )),
                   );
                 },
               ),
@@ -74,7 +81,9 @@ class _PlaceBodyState extends State<PlaceBody> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const View360()),
+                    MaterialPageRoute(builder: (context) =>  View360(
+                      path: 'https://drive.google.com/uc?export=download&id=1I75m73myN_oKf9G8rQhLIZMd2UdcTKIb',
+                    )),
                   );
                 },
               ),

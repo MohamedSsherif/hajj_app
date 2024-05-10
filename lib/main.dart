@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hajj_app/firebase_options.dart';
@@ -5,10 +6,10 @@ import 'package:hajj_app/helpers/read_doaa_json.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/home_page.dart';
-import 'package:hajj_app/views/login_page.dart';
+import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/views/prayer_time.dart';
 import 'package:hajj_app/views/quibla.dart';
-import 'package:hajj_app/views/register_page.dart';
+import 'package:hajj_app/auth/register_page.dart';
 import 'package:hajj_app/views/tasbih_page.dart';
 
 void main() async {
@@ -37,7 +38,7 @@ class Hajj extends StatelessWidget {
         TasbihPage.id: (context) => const TasbihPage(),
         EmergencyPage.id: (context) => const EmergencyPage(),
       },
-      initialRoute: LoginPage.id,
+      initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id : HomePage.id,
     );
   }
 }

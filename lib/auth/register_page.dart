@@ -19,16 +19,18 @@ class _RegisterState extends State<Register> {
   String? email;
   String? confirmpassword;
   String? password;
+  String? username;
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
   late TextEditingController emailController;
+  late TextEditingController usernameController;
 
   @override
   void initState() {
     super.initState();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
-    
+    usernameController = TextEditingController();
     emailController = TextEditingController();
   }
 
@@ -37,6 +39,7 @@ class _RegisterState extends State<Register> {
     passwordController.dispose();
     confirmPasswordController.dispose();
     emailController.dispose();
+    usernameController.dispose();
     super.dispose();
   }
 
@@ -76,7 +79,7 @@ class _RegisterState extends State<Register> {
                         fontSize: 24,
                         fontFamily: 'pacifico'),
                   ),
-                  //SizedBox(height: 32),
+                 
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Row(
@@ -89,10 +92,15 @@ class _RegisterState extends State<Register> {
                       ],
                     ),
                   ),
-
-                  const SizedBox(
-                    height: 10,
+                  
+                   CustomFormTextField(
+                    controller: usernameController,
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    labelText: 'Username',
                   ),
+
                   CustomFormTextField(
                     controller: emailController,
                     onChanged: (value) {
@@ -100,9 +108,7 @@ class _RegisterState extends State<Register> {
                     },
                     labelText: 'Email',
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                 
                   CustomFormTextField(
                     controller: passwordController,
                     onChanged: (value) {
@@ -110,9 +116,7 @@ class _RegisterState extends State<Register> {
                     },
                     labelText: 'password',
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                 
                   CustomFormTextField(
                     controller: confirmPasswordController,
                     onChanged: (value) {
@@ -121,7 +125,7 @@ class _RegisterState extends State<Register> {
                     labelText: 'Confirm Password',
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   CustomButton(
                       onTap: () async {

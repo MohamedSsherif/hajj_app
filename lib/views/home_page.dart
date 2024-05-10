@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/services/prayer_times_service.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    PrayerTimeService.instance.getPrayersTimes();
+    // PrayerTimeService.instance.getPrayersTimes();
   }
 
   @override
@@ -115,6 +117,15 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.help_center_outlined),
               onTap: () {
                 Navigator.pushNamed(context, EmergencyPage.id);
+              },
+            ),
+             ListTileDrawer(
+              title: 'تسجيل خروج',
+              icon: const Icon(Icons.logout),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, LoginPage.id, (route) => false);
               },
             ),
           ],

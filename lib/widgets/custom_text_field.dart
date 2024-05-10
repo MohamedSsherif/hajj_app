@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomFormTextField extends StatelessWidget {
-   const CustomFormTextField({super.key, this.labelText, this.onChanged, this.obscureText=false ,required  this.controller});
+   const  CustomFormTextField({super.key, this.labelText, this.onChanged, this.obscureText=false ,required  this.controller});
 
 final String? labelText;
 final Function(String)? onChanged;
@@ -16,31 +16,39 @@ final TextEditingController controller;
         controller: controller,
         obscureText: obscureText ?? false,
         validator: (data){
-          if((((data?.isEmpty) ?? false) && labelText == "email" && (data?.contains("@") ?? false))){
+          if(data!.isEmpty){
             return 'This field is required';
           }
-          return null;
+          // if((((data?.isEmpty) ?? false) && labelText == "email" && (data?.contains("@") ?? false))){
+          //   return 'This field is required';
+          // }
+          // return null;
         },
         onChanged: onChanged,
         decoration: InputDecoration(
           focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50)),
             borderSide: BorderSide(
               color: Colors.orange
             ),
           ),
           border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50)),
             borderSide: BorderSide(
               color: Colors.white,
             )
           ),
           enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50)),
             borderSide: BorderSide(
               color: Colors.white,
             ),
           ),
           hintText: labelText,
           hintStyle: const TextStyle(color: Colors.white,),
+          
         ),
+        
         ),
     );
   }

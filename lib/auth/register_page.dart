@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hajj_app/constants.dart';
@@ -79,7 +80,6 @@ class _RegisterState extends State<Register> {
                         fontSize: 24,
                         fontFamily: 'pacifico'),
                   ),
-                 
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Row(
@@ -92,15 +92,13 @@ class _RegisterState extends State<Register> {
                       ],
                     ),
                   ),
-                  
-                   CustomFormTextField(
+                  CustomFormTextField(
                     controller: usernameController,
                     onChanged: (value) {
                       email = value;
                     },
                     labelText: 'Username',
                   ),
-
                   CustomFormTextField(
                     controller: emailController,
                     onChanged: (value) {
@@ -108,7 +106,6 @@ class _RegisterState extends State<Register> {
                     },
                     labelText: 'Email',
                   ),
-                 
                   CustomFormTextField(
                     controller: passwordController,
                     onChanged: (value) {
@@ -116,7 +113,6 @@ class _RegisterState extends State<Register> {
                     },
                     labelText: 'password',
                   ),
-                 
                   CustomFormTextField(
                     controller: confirmPasswordController,
                     onChanged: (value) {
@@ -134,7 +130,17 @@ class _RegisterState extends State<Register> {
                             isLoading = true;
                           });
                           try {
-                            await Auth();
+                            UserCredential user = await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: email!, password: password!);
+                            await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(user.user!.uid)
+                                .set({
+                              'name': usernameController.text,
+                              'email': emailController.text,
+                              // Add other user details here
+                            });
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               // ignore: use_build_context_synchronously
@@ -156,8 +162,9 @@ class _RegisterState extends State<Register> {
                           showSnackBar(context, 'Account created successfully');
                           // ignore: use_build_context_synchronously
                           Navigator.pop(context, 'LoginPage');
-                        }else{
-                          showSnackBar(context, 'Password does not match');}
+                        } else {
+                          showSnackBar(context, 'Password does not match');
+                        }
                       },
                       text: 'Sign Up'),
                   const SizedBox(
@@ -186,16 +193,17 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  // ignore: non_constant_identifier_names
-  Future<void> Auth() async {
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email!, password: password!);
-  }
+  // // ignore: non_constant_identifier_names
+  // Future<void> Auth() async {
+  //   UserCredential user = await FirebaseAuth.instance
+  //       .createUserWithEmailAndPassword(email: email!, password: password!);
+  // }
 
   bool isValid() {
-    if((passwordController.text == confirmPasswordController.text) && (formKey.currentState?.validate() ?? false)){
+    if ((passwordController.text == confirmPasswordController.text) &&
+        (formKey.currentState?.validate() ?? false)) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }

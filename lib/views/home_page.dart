@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/services/prayer_times_service.dart';
+import 'package:hajj_app/services/user_service.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/doaa_body.dart';
@@ -12,12 +13,14 @@ import 'package:hajj_app/views/place_body.dart';
 import 'package:hajj_app/views/prayer_time.dart';
 import 'package:hajj_app/views/quibla.dart';
 import 'package:hajj_app/views/tasbih_page.dart';
+import 'package:hajj_app/views/update_user_info.dart';
 import 'package:hajj_app/widgets/List_title_drawer.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.userId});
   static String id = 'HomePage';
+   final String userId;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,12 +28,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late PrayerTimeService service;
+  late String _username;
+  //late String _imageUrl;
   int currentPageIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    _getUserData();
     // PrayerTimeService.instance.getPrayersTimes();
+  }
+    Future<void> _getUserData() async {
+    try {
+      Map<String, dynamic> userData = await UserService.getUserData(widget.userId);
+      setState(() {
+        _username = userData['name'];
+       // _imageUrl = userData['imageUrl'];
+      });
+    } catch (e) {
+      print('Error retrieving user data: $e');
+    }
   }
 
   @override
@@ -63,26 +80,33 @@ class _HomePageState extends State<HomePage> {
         endDrawer: Drawer(
             child: ListView(
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
+             DrawerHeader(
+              decoration: const BoxDecoration(
                 color: KPrimaryColor,
               ),
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 50,
                     backgroundImage: AssetImage('assets/images/ji8.jpg'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 2,
                   ),
                   Text(
-                    'قافلة المسلمين',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    _username??'',
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],
               ),
+            ),
+             ListTileDrawer(
+              title: 'الصفحه الشخصيه',
+              icon: const Icon(Icons.person),
+              onTap: () {
+                Navigator.pushNamed(context, UserProfilePage.id);
+              },
             ),
             ListTileDrawer(
               title: 'مواقيت الصلاه',

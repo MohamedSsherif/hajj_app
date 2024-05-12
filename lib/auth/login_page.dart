@@ -87,15 +87,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 CustomFormTextField(
-                    controller: emailController,
-                    onChanged: (value) {
-                      email = value;
-                    },
-                    labelText: 'Email',),
+                  controller: emailController,
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  labelText: 'Email',
+                ),
                 CustomFormTextField(
                   controller: passwordController,
                   obscureText: true,
-                  
                   onChanged: (value) {
                     password = value;
                   },
@@ -138,63 +138,52 @@ class _LoginPageState extends State<LoginPage> {
                           showSnackBar(context, "Wrong credentials");
                         }
                       } on FirebaseAuthException catch (e) {
-                       // String error = "Error";
-                       
-                          if(e.code == "network-request-failed"){
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'Error',
-                              desc: 'check your network connection',
-                              // btnCancelOnPress: () {},
-                              // btnOkOnPress: () {},
-                            ).show();
-                            // error = "Timeout";
-                          }
-                          else if(e.code == "user-not-found"){
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'Error',
-                              desc: 'user not found',
-                              // btnCancelOnPress: () {},
-                              // btnOkOnPress: () {},
-                            ).show();
-                            
-                           // error = "USer not found";
-                          //   break;
-                          }
-                          else if(e.code == "wrong-password"){
+                        if (e.code == "network-request-failed") {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.rightSlide,
+                            title: 'Error',
+                            desc: 'check your network connection',
+                            btnCancelOnPress: () {},
+                          ).show();
+                        } else if (e.code == "user-not-found") {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.rightSlide,
+                            title: 'Error',
+                            desc: 'user not found',
+                            btnCancelOnPress: () {},
+                          ).show();
+                        } else if (e.code == "wrong-password" ||
+                            e.code ==
+                                'The supplied auth credential is incorrect, malformed or has expired.' ||
+                            e.code == 'invalid-credential') {
                           //case "invalid-credential":
-                            AwesomeDialog(
-                              context: context,
-                              //dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'Error',
-                              desc: 'we couldn\'t find an account with that email address or password',
-                              btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.rightSlide,
+                            title: 'Error',
+                            desc:
+                                'we couldn\'t find an account with that email address or password',
+                            btnCancelOnPress: () {},
+                          ).show();
+                        } else {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.rightSlide,
+                            title: 'Error',
+                            desc: 'An error occurred, please try again later',
+                            btnCancelOnPress: () {},
+                            // btnOkOnPress: () {},
+                          ).show();
+                          //error = "An error occurred, please try again later";
+                        }
 
-                            ).show();
-                            //error = "Invalid credentials";
-                            
-                          }
-                        //   else{
-                        //     AwesomeDialog(
-                        //       context: context,
-                        //       dialogType: DialogType.error,
-                        //       animType: AnimType.rightSlide,
-                        //       title: 'Error',
-                        //       desc: 'An error occurred, please try again later',
-                        //       // btnCancelOnPress: () {},
-                        //       // btnOkOnPress: () {},
-                        //     ).show();
-                        //     //error = "An error occurred, please try again later";
-                        // }
-
-                       // showSnackBar(context, e.toString());
+                        // showSnackBar(context, e.toString());
                       } on PlatformException catch (e) {
                         showSnackBar(context, e.toString());
                       } catch (e) {
@@ -204,14 +193,14 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         isLoading = false;
                       });
-                    }else{
+                    } else {
                       AwesomeDialog(
                         context: context,
                         dialogType: DialogType.error,
                         animType: AnimType.rightSlide,
                         title: 'Error',
                         desc: 'Please fill all fields',
-                        // btnCancelOnPress: () {},
+                        btnCancelOnPress: () {},
                         // btnOkOnPress: () {},
                       ).show();
                     }

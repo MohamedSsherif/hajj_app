@@ -11,6 +11,7 @@ import 'package:hajj_app/views/prayer_time.dart';
 import 'package:hajj_app/views/quibla.dart';
 import 'package:hajj_app/auth/register_page.dart';
 import 'package:hajj_app/views/tasbih_page.dart';
+import 'package:hajj_app/views/update_user_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,15 +31,17 @@ class Hajj extends StatelessWidget {
       routes: {
         LoginPage.id: (context) => const LoginPage(),
         Register.id: (context) => const Register(),
-        HomePage.id: (context) => const HomePage(),
+        HomePage.id: (context) => HomePage(userId: FirebaseAuth.instance.currentUser!.uid),
         QuiblahPage.id: (context) => const QuiblahPage(),
         AzkarPage.id: (context) => const AzkarPage(),
         PrayerTimePage.id: (context) => PrayerTimePage(),
         ReadDoaaJson.id: (context) => ReadDoaaJson(path: 'assets/json/doaa.json'),
         TasbihPage.id: (context) => const TasbihPage(),
         EmergencyPage.id: (context) => const EmergencyPage(),
+        UserProfilePage.id: (context) => UserProfilePage(userId: FirebaseAuth.instance.currentUser!.uid),
       },
       initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id : HomePage.id,
+      //initialRoute: LoginPage.id,
     );
   }
 }

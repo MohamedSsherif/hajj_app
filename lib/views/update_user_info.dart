@@ -52,8 +52,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
               decoration: InputDecoration(labelText: 'New Email'),
             ),
             ElevatedButton(
-              onPressed: _updateUserInfo,
+              onPressed: _updateUserInfo
+              ,
+              
               child: Text('Update'),
+              
             ),
           ],
         ),

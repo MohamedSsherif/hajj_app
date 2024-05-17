@@ -20,7 +20,7 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.userId});
   static String id = 'HomePage';
-   final String userId;
+  final String userId;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -35,15 +35,16 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _getUserData();
+   // _getUserData();
     // PrayerTimeService.instance.getPrayersTimes();
   }
-    Future<void> _getUserData() async {
+  Future<void> _getUserData() async {
     try {
-      Map<String, dynamic> userData = await UserService.getUserData(widget.userId);
+      Map<String, dynamic> userData =
+          await UserService.getUserData(widget.userId);
       setState(() {
         _username = userData['name'];
-       // _imageUrl = userData['imageUrl'];
+        // _imageUrl = userData['imageUrl'];
       });
     } catch (e) {
       print('Error retrieving user data: $e');
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         endDrawer: Drawer(
             child: ListView(
           children: [
-             DrawerHeader(
+            DrawerHeader(
               decoration: const BoxDecoration(
                 color: KPrimaryColor,
               ),
@@ -94,14 +95,36 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 2,
                   ),
-                  Text(
-                    _username??'',
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                  SizedBox(
+                    height: 30,
+                    child: StreamBuilder<Object>(
+                        stream: FirebaseAuth.instance
+                            .authStateChanges().distinct()
+                            .cast<Object>(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return const Text('Error');
+                          } else if (snapshot.hasData) {
+                            _getUserData();
+                          } else {
+                            return const Text('No Data');
+                          }
+                          return Text(
+                            _username,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 18),
+                          );
+
+  
+                        }),
                   ),
                 ],
               ),
             ),
-             ListTileDrawer(
+            ListTileDrawer(
               title: 'الصفحه الشخصيه',
               icon: const Icon(Icons.person),
               onTap: () {
@@ -143,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, EmergencyPage.id);
               },
             ),
-             ListTileDrawer(
+            ListTileDrawer(
               title: 'تسجيل خروج',
               icon: const Icon(Icons.logout),
               onTap: () async {

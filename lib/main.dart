@@ -40,8 +40,8 @@ class Hajj extends StatelessWidget {
         EmergencyPage.id: (context) => const EmergencyPage(),
         UserProfilePage.id: (context) => UserProfilePage(userId: FirebaseAuth.instance.currentUser!.uid),
       },
-      //initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id : HomePage.id,
-      initialRoute: LoginPage.id,
+      initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id : HomePage.id,
+      //initialRoute: LoginPage.id,
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_snack_bar.dart';
+import 'package:hajj_app/services/auth_service.dart';
 import 'package:hajj_app/widgets/custom_button.dart';
 import 'package:hajj_app/widgets/custom_text_field.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -130,17 +131,22 @@ class _RegisterState extends State<Register> {
                             isLoading = true;
                           });
                           try {
-                            UserCredential user = await FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                    email: email!, password: password!);
-                            await FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(user.user!.uid)
-                                .set({
-                              'name': usernameController.text,
-                              'email': emailController.text,
-                              // Add other user details here
-                            });
+                            // UserCredential user = await FirebaseAuth.instance
+                            //     .createUserWithEmailAndPassword(
+                            //         email: email!, password: password!);
+                            // await FirebaseFirestore.instance
+                            //     .collection('users')
+                            //     .doc(user.user!.uid)
+                            //     .set({
+                            //   'name': usernameController.text,
+                            //   'email': emailController.text,
+                            //   // Add other user details here
+                            // });
+                            AuthService authService = AuthService();
+                            authService.registerUser(
+                                emailController.text,
+                                passwordController.text,
+                                usernameController.text);
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               // ignore: use_build_context_synchronously

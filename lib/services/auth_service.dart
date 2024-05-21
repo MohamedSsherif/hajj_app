@@ -38,26 +38,34 @@ class AuthService {
     }
   }
 
-  Future<void> registerUser(String name, String email, String password, File? profileImage) async {
+ Future<void> registerUser(String email, String password, String username) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User? user = userCredential.user;
 
-      String? profileImageUrl = await uploadProfilePicture(userCredential.user!.uid, profileImage);
+      if (user != null) {
+        String defaultPhotoUrl = 'assets/images/default-avatar-profile-in-trendy-style-for-social-media-user-icon-700-228654852.jpg';
 
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
-        'name': name,
-        'email': email,
-        'profileImageUrl': profileImageUrl,
-        // Add other user details here
-      });
+        // Create a new document in Firestore with the initial profile photo
+        await _firestore.collection('users').doc(user.uid).set({
+          'name': username,
+          'email': email,
+          'profilePicture': defaultPhotoUrl
+        });
+
+        print('User registered with default profile photo');
+      } else {
+        throw Exception('User registration failed');
+      }
+    } on FirebaseAuthException catch (e) {
+      print('Error registering user: ${e.code} - ${e.message}');
+      throw e;
     } catch (e) {
       print('Error registering user: $e');
-      throw e; // Propagate the error for handling in UI
+      throw e;
     }
   }
 
   // Other authentication-related functions...
 }
+//https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png

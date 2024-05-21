@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/constants.dart';
+import 'package:hajj_app/helpers/show_user_data_in_homep.dart';
 import 'package:hajj_app/services/prayer_times_service.dart';
 import 'package:hajj_app/services/user_service.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
@@ -28,7 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late PrayerTimeService service;
-  late String _username;
+ 
   //late String _imageUrl;
   int currentPageIndex = 0;
 
@@ -38,18 +39,7 @@ class _HomePageState extends State<HomePage> {
    // _getUserData();
     // PrayerTimeService.instance.getPrayersTimes();
   }
-  Future<void> _getUserData() async {
-    try {
-      Map<String, dynamic> userData =
-          await UserService.getUserData(widget.userId);
-      setState(() {
-        _username = userData['name'];
-        // _imageUrl = userData['imageUrl'];
-      });
-    } catch (e) {
-      print('Error retrieving user data: $e');
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,44 +75,7 @@ class _HomePageState extends State<HomePage> {
               decoration: const BoxDecoration(
                 color: KPrimaryColor,
               ),
-              child: Column(
-                children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.black,
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/images/ji8.jpg'),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: StreamBuilder<Object>(
-                        stream: FirebaseAuth.instance
-                            .authStateChanges().distinct()
-                            .cast<Object>(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.hasError) {
-                            return const Text('Error');
-                          } else if (snapshot.hasData) {
-                            _getUserData();
-                          } else {
-                            return const Text('No Data');
-                          }
-                          return Text(
-                            _username,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 18),
-                          );
-
-  
-                        }),
-                  ),
-                ],
-              ),
+              child: ShowUserData()
             ),
             ListTileDrawer(
               title: 'الصفحه الشخصيه',

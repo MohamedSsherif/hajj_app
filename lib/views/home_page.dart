@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               title: 'الصفحه الشخصيه',
               icon: const Icon(Icons.person),
               onTap: () {
-                Navigator.pushNamed(context, UserProfilePage.id);
+                Navigator.pushNamed(context, UpdateUserProfile.id);
               },
             ),
             ListTileDrawer(

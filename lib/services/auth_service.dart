@@ -10,33 +10,6 @@ class AuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
-  Future<String?> uploadProfilePicture(String userId, File? imageFile) async {
-    try {
-      if (imageFile != null) {
-        Reference storageReference = _storage.ref().child('profilePictures/$userId');
-        UploadTask uploadTask = storageReference.putFile(imageFile);
-        TaskSnapshot taskSnapshot = await uploadTask;
-        String downloadURL = await taskSnapshot.ref.getDownloadURL();
-        return downloadURL;
-      }
-    } catch (e) {
-      print('Error uploading profile picture: $e');
-    }
-    return null;
-  }
-
-   // Function to pick image from gallery
-  void pickImage(Function(File) onImagePicked) async {
-    try {
-      final picker = ImagePicker();
-      final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
-        onImagePicked(File(pickedImage.path));
-      }
-    } catch (e) {
-      print('Error picking image: $e');
-    }
-  }
 
  Future<void> registerUser(String email, String password, String username) async {
     try {

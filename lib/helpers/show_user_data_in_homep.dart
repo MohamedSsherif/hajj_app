@@ -36,7 +36,7 @@ class _ShowUserDataState extends State<ShowUserData> {
                 backgroundColor: Colors.grey,
                 radius: 50,
                 backgroundImage: 
-                    AssetImage(imageUrl) as ImageProvider,
+                imageUrl.startsWith('http') ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider<Object>?,
               ),
               const SizedBox(
                 height: 2,

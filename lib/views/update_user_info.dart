@@ -298,6 +298,8 @@ class _UpdateUserProfileState extends State<UpdateUserProfile> {
                   children: [
                     CircleAvatar(
                       radius: 50,
+                      //backgroundImage: AssetImage(profilePicture) as ImageProvider,
+
                       backgroundImage: _imageFile != null
                         ? FileImage(_imageFile!)
                         : (profilePicture.startsWith('http')

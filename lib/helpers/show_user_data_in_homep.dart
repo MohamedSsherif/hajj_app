@@ -10,14 +10,15 @@ class ShowUserData extends StatefulWidget {
 }
 
 class _ShowUserDataState extends State<ShowUserData> {
-
- 
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     String userId = FirebaseAuth.instance.currentUser!.uid;
 
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance.collection('users').doc(userId).snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
@@ -28,15 +29,17 @@ class _ShowUserDataState extends State<ShowUserData> {
         } else {
           var userData = snapshot.data!.data()!;
           String username = userData['name'] ?? 'No username';
-          String imageUrl = userData['profilePicture'] ?? 'assets/default_profile_picture.png';
+          String imageUrl = userData['profilePicture'] ??
+              'assets/default_profile_picture.png';
 
           return Column(
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey,
                 radius: 50,
-                backgroundImage: 
-                imageUrl.startsWith('http') ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider<Object>?,
+                backgroundImage: imageUrl.startsWith('http')
+                    ? NetworkImage(imageUrl)
+                    : AssetImage(imageUrl) as ImageProvider<Object>?,
               ),
               const SizedBox(
                 height: 2,
@@ -55,4 +58,3 @@ class _ShowUserDataState extends State<ShowUserData> {
     );
   }
 }
-

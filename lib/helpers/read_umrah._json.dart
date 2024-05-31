@@ -39,14 +39,13 @@ class _ReadUmrahJsonState extends State<ReadUmrahJson> {
             ),
           ),
           FutureBuilder(
-            
               future: readJson(widget.path),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<UmrahModel> umrah = snapshot.data as List<UmrahModel>;
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                     shrinkWrap: true,
+                    shrinkWrap: true,
                     itemCount: umrah.length,
                     itemBuilder: (context, index) {
                       return Container(
@@ -62,8 +61,8 @@ class _ReadUmrahJsonState extends State<ReadUmrahJson> {
                                   child: Text(
                                     textAlign: TextAlign.right,
                                     "  خطوه:  ${umrah[index].name}",
-                                    style:
-                                        const TextStyle(fontSize: 18, color: Colors.white),
+                                    style: const TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                   ),
                                 ),
                                 Padding(

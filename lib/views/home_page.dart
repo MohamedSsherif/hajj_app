@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_user_data_in_homep.dart';
-import 'package:hajj_app/services/prayer_times_service.dart';
-import 'package:hajj_app/services/user_service.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/doaa_body.dart';
 import 'package:hajj_app/views/home_body.dart';
+import 'package:hajj_app/views/map_page.dart';
 import 'package:hajj_app/views/mnask_body.dart';
 import 'package:hajj_app/views/place_body.dart';
 import 'package:hajj_app/views/prayer_time.dart';
@@ -28,18 +27,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late PrayerTimeService service;
- 
-  //late String _imageUrl;
   int currentPageIndex = 0;
 
   @override
   void initState() {
     super.initState();
-   // _getUserData();
-    // PrayerTimeService.instance.getPrayersTimes();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,35 +41,51 @@ class _HomePageState extends State<HomePage> {
             ? null
             : AppBar(
                 automaticallyImplyLeading: false,
-                title: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                title: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MapScreen(),
+                            ),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.location_on,
+                          color: Colors.white,
+                        )),
+                    const SizedBox(
+                      width: 60,
+                    ),
+                    const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         'قافلة المسلمين',
                         style: TextStyle(color: Colors.black, fontSize: 24),
                       ),
                     ),
-                    CircleAvatar(
-                      backgroundColor: Colors.black,
+                    const CircleAvatar(
+                      backgroundColor: KIconColor,
                       radius: 20,
                       backgroundImage: AssetImage('assets/images/ji8.jpg'),
                     ),
                   ],
                 ),
                 centerTitle: true,
-                backgroundColor: const Color.fromARGB(255, 156, 149, 87),
+                backgroundColor: KPrimaryColor,
+                iconTheme: const IconThemeData(color: Colors.white),
               ),
         endDrawer: Drawer(
             child: ListView(
           children: [
             DrawerHeader(
-              decoration: const BoxDecoration(
-                color: KPrimaryColor,
-              ),
-              child: ShowUserData()
-            ),
+                decoration: const BoxDecoration(
+                  color: KPrimaryColor,
+                ),
+                child: ShowUserData()),
             ListTileDrawer(
               title: 'الصفحه الشخصيه',
               icon: const Icon(Icons.person),

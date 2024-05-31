@@ -1,32 +1,29 @@
 import 'dart:async';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
-
-import 'package:hajj_app/constants.dart';
-
-import 'package:hajj_app/widgets/card_for_prayer_time.dart';
 import 'package:intl/intl.dart';
 
-class PrayerTimePage extends StatefulWidget {
-  static String id = 'PrayerTimePage';
-  final String? nextPrayer;
-  final Duration? timeRemaining;
+import '../container_for_next_prayer_home_body.dart'; // Ensure to add intl package to pubspec.yaml
+import 'package:http/http.dart' as http;
 
-  const PrayerTimePage({super.key, this.nextPrayer, this.timeRemaining});
+class NextPrayerSection extends StatefulWidget {
+  const NextPrayerSection({super.key, this.initialDuration});
+
+  final Duration? initialDuration;
 
   @override
-  State<PrayerTimePage> createState() => _PrayerTimePageState();
+  State<NextPrayerSection> createState() => _NextPrayerSectionState();
 }
 
-class _PrayerTimePageState extends State<PrayerTimePage> {
+class _NextPrayerSectionState extends State<NextPrayerSection> {
   final prayers = {
     "Fajr": "04:38",
     "Dhuhr": "12:53",
     "Asr": "16:29",
     "Maghrib": "19:51",
     "Isha": "21:07",
-    "Fajr": "04:38",
   };
+
   String nextPrayer = '';
   late Timer _timer;
   late Duration _currentTimeRemaining;
@@ -56,12 +53,11 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
     });
   }
 
-  List<MapEntry<String, DateTime>>? prayerTimes;
   void _calculateNextPrayer() {
     DateTime now = DateTime.now().toUtc();
 
     // Convert prayer times to DateTime objects
-    prayerTimes = prayers.entries.map((entry) {
+    List<MapEntry<String, DateTime>> prayerTimes = prayers.entries.map((entry) {
       DateTime prayerTime = DateFormat("HH:mm").parse(entry.value);
       // Set prayer time to today's date
       return MapEntry(
@@ -77,12 +73,12 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
     }).toList();
 
     // Sort prayer times in ascending order
-    prayerTimes!.sort((a, b) => a.value.compareTo(b.value));
+    prayerTimes.sort((a, b) => a.value.compareTo(b.value));
 
     // Find the next prayer time
     DateTime? nextPrayerTime;
     String? nextPrayerName;
-    for (var entry in prayerTimes!) {
+    for (var entry in prayerTimes) {
       if (entry.value.isAfter(now)) {
         nextPrayerTime = entry.value;
         nextPrayerName = entry.key;
@@ -92,8 +88,8 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
 
     // If no next prayer time is found, it means the next prayer is Fajr of the next day
     if (nextPrayerTime == null) {
-      nextPrayerTime = prayerTimes!.first.value.add(const Duration(days: 1));
-      nextPrayerName = prayerTimes!.first.key;
+      nextPrayerTime = prayerTimes.first.value.add(const Duration(days: 1));
+      nextPrayerName = prayerTimes.first.key;
     }
 
     setState(() {
@@ -104,31 +100,21 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Prayer Times',
-          style: const TextStyle(color: KTextBrown),
-        ),
-        centerTitle: true,
-        backgroundColor: KPrimaryColor,
-      ),
-      body: SingleChildScrollView(
-        child: prayers == null
-            ? Container(
-                alignment: Alignment.center,
-                width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height,
-                child: const CircularProgressIndicator(
-                  color: KTextBrown,
-                ),
-              )
-            : CardPrayerTime(
-                prayerTimes: prayers,
-                nextPrayer: nextPrayer,
-                timeRemaining: _currentTimeRemaining,
-              ),
-      ),
+    return CustomContainerprayer(
+      image: 'assets/images/NextPrayer2.jpg',
+      text: 'Next Prayer',
+      prayerName: nextPrayer,
+      remainingTime: _currentTimeRemaining,
+      remainingTimeTxt:
+          'Time Remaining: ${_formatDuration(_currentTimeRemaining)}',
+      text2: 'Press here to know prayer time',
     );
+  }
+
+  String _formatDuration(Duration duration) {
+    int hours = duration.inHours;
+    int minutes = duration.inMinutes.remainder(60);
+    int seconds = duration.inSeconds.remainder(60);
+    return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 }

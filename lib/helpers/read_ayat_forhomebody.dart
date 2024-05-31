@@ -78,18 +78,12 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.2,
-              child: Image.asset("assets/images/luxury-golden-islamic-title-frame-for-ramadan-kareem-free-png.webp",
-                  fit: BoxFit.cover, height: MediaQuery.of(context).size.height * 0.2, width: MediaQuery.of(context).size.width),
+              child: Image.asset(
+                  "assets/images/luxury-golden-islamic-title-frame-for-ramadan-kareem-free-png.webp",
+                  fit: BoxFit.cover,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width),
             ),
-
-            // ClipRRect(
-            //     borderRadius: BorderRadius.circular(10),
-            //     child: Image.asset(
-            //       'assets/images/luxury-golden-islamic-title-frame-for-ramadan-kareem-free-png.webp',
-            //       fit: BoxFit.cover,
-            //       width: MediaQuery.of(context).size.width,
-            //       height: MediaQuery.of(context).size.height * 0.2,
-            //     )),
             FutureBuilder<List<AyatModel>>(
               future: readJson(),
               builder: (context, snapshot) {
@@ -101,7 +95,9 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
                   ayatList = snapshot.data!;
                   return Center(
                     child: Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.055, bottom: 8.0),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.055,
+                          bottom: 8.0),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * .7,
                         // height: MediaQuery.of(context).size.height * 0.05,
@@ -110,7 +106,11 @@ class _ReadAyatForHomeBodyState extends State<ReadAyatForHomeBody> {
                           child: Center(
                             child: Text(
                               ayatList[currentIndex].text,
-                              style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold, height: 1.5),
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.5),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
                             ),

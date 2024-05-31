@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomFormTextField extends StatelessWidget {
-   const  CustomFormTextField({super.key, this.labelText, this.onChanged, this.obscureText=false ,required  this.controller});
+  const CustomFormTextField(
+      {super.key,
+      this.labelText,
+      this.onChanged,
+      this.obscureText = false,
+      required this.controller});
 
-final String? labelText;
-final Function(String)? onChanged;
-final bool? obscureText;
-final TextEditingController controller;
+  final String? labelText;
+  final Function(String)? onChanged;
+  final bool? obscureText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -15,29 +20,22 @@ final TextEditingController controller;
       child: TextFormField(
         controller: controller,
         obscureText: obscureText ?? false,
-        validator: (data){
-          if(data!.isEmpty){
+        validator: (data) {
+          if (data!.isEmpty) {
             return 'This field is required';
           }
-          // if((((data?.isEmpty) ?? false) && labelText == "email" && (data?.contains("@") ?? false))){
-          //   return 'This field is required';
-          // }
-          // return null;
         },
         onChanged: onChanged,
         decoration: InputDecoration(
           focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: BorderSide(
-              color: Colors.orange
-            ),
+            borderSide: BorderSide(color: Colors.orange),
           ),
           border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: BorderSide(
-              color: Colors.white,
-            )
-          ),
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderSide: BorderSide(
+                color: Colors.white,
+              )),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(50)),
             borderSide: BorderSide(
@@ -45,11 +43,11 @@ final TextEditingController controller;
             ),
           ),
           hintText: labelText,
-          hintStyle: const TextStyle(color: Colors.white,),
-          
+          hintStyle: const TextStyle(
+            color: Colors.white,
+          ),
         ),
-        
-        ),
+      ),
     );
   }
 }

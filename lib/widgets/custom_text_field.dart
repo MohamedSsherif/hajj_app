@@ -20,11 +20,14 @@ class CustomFormTextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         obscureText: obscureText ?? false,
-        validator: (data) {
-          if (data!.isEmpty) {
-            return 'This field is required';
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'هذا الحقل مطلوب';
           }
+          return null;
         },
+        
+
         onChanged: onChanged,
         decoration: InputDecoration(
           focusedBorder: const OutlineInputBorder(

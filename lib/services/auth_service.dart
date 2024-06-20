@@ -39,6 +39,16 @@ class AuthService {
     }
   }
 
+     Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      print('Password reset email sent');
+    } catch (e) {
+      print('Error sending password reset email: $e');
+      throw e;
+    }
+  }
+
   // Other authentication-related functions...
 }
 //https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png

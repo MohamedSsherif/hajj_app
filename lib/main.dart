@@ -5,6 +5,7 @@ import 'package:hajj_app/firebase_options.dart';
 import 'package:hajj_app/helpers/read_doaa_json.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
+import 'package:hajj_app/views/forget_password_page.dart';
 import 'package:hajj_app/views/home_page.dart';
 import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/views/prayer_time.dart';
@@ -39,6 +40,7 @@ class Hajj extends StatelessWidget {
         TasbihPage.id: (context) => const TasbihPage(),
         EmergencyPage.id: (context) => const EmergencyPage(),
         UpdateUserProfile.id: (context) => UpdateUserProfile(),
+        ResetPasswordPage.id: (context) =>  ResetPasswordPage(),
         //userId: FirebaseAuth.instance.currentUser!.uid
       },
       initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id : HomePage.id,

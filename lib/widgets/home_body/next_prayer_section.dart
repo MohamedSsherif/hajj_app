@@ -17,11 +17,11 @@ class NextPrayerSection extends StatefulWidget {
 
 class _NextPrayerSectionState extends State<NextPrayerSection> {
   final prayers = {
-    "Fajr": "04:38",
-    "Dhuhr": "12:53",
-    "Asr": "16:29",
-    "Maghrib": "19:51",
-    "Isha": "21:07",
+    "الفجر": "04:38",
+    "الضهر": "12:53",
+    "العصر": "16:29",
+    "المغرب": "19:51",
+    "العشاء": "21:07",
   };
 
   String nextPrayer = '';
@@ -102,7 +102,7 @@ class _NextPrayerSectionState extends State<NextPrayerSection> {
   Widget build(BuildContext context) {
     return CustomContainerprayer(
       image: 'assets/images/NextPrayer2.jpg',
-      text: 'Next Prayer',
+      text: 'الصلاه القادمه  ',
       prayerName: nextPrayer,
       remainingTime: _currentTimeRemaining,
       remainingTimeTxt:

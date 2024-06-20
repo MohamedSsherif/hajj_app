@@ -1,12 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hajj_app/constants.dart';
 import 'package:hajj_app/helpers/show_snack_bar.dart';
+import 'package:hajj_app/views/forget_password_page.dart';
 import 'package:hajj_app/views/home_page.dart';
 import 'package:hajj_app/auth/register_page.dart';
 import 'package:hajj_app/widgets/custom_text_field.dart';
@@ -65,24 +66,29 @@ class _LoginPageState extends State<LoginPage> {
                   backgroundColor: Colors.white,
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  'Muslim',
-                  style: TextStyle(
-                    fontFamily: 'Pacifico',
-                    fontSize: 25.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                 Text(
+                  'مسلم',
+                
+                   style: GoogleFonts.lemonada(
+                            textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text('Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                          )),
+                      Text(
+                        'تسجيل الدخول',
+                        style: GoogleFonts.arefRuqaa(
+                            textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                        )),
+                      ),
                     ],
                   ),
                 ),
@@ -91,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                   onChanged: (value) {
                     email = value;
                   },
-                  labelText: 'Email',
+                  labelText: 'البريد الالكترونى',
                 ),
                 CustomFormTextField(
                   controller: passwordController,
@@ -99,19 +105,21 @@ class _LoginPageState extends State<LoginPage> {
                   onChanged: (value) {
                     password = value;
                   },
-                  labelText: 'Password',
+                  labelText: 'الرقم السرى',
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    child: Container(
-                        alignment: Alignment.centerRight,
-                        child: const Text('Forget password ?',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ))),
-                  ),
+                      child: Container(
+                          alignment: Alignment.centerRight,
+                          child: const Text('نسيت كلمه السر؟',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ))),
+                      onTap: () {
+                        Navigator.pushNamed(context, ResetPasswordPage.id);
+                      }),
                 ),
                 CustomButton(
                   onTap: () async {
@@ -132,10 +140,17 @@ class _LoginPageState extends State<LoginPage> {
                                 password: passwordController.text);
 
                         if (user.user != null) {
-                          showSnackBar(context, 'success');
+                          showSnackBar(context, 'تم تسجيل الدخول بنجاح');
                           Navigator.pushReplacementNamed(context, HomePage.id);
                         } else {
-                          showSnackBar(context, "Wrong credentials");
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.rightSlide,
+                            title: 'خطأ',
+                            desc: 'حدث خطأ ما، يرجى المحاولة مرة أخرى',
+                            btnCancelOnPress: () {},
+                          ).show();
                         }
                       } on FirebaseAuthException catch (e) {
                         if (e.code == "network-request-failed") {
@@ -143,8 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             dialogType: DialogType.error,
                             animType: AnimType.rightSlide,
-                            title: 'Error',
-                            desc: 'check your network connection',
+                            title: 'خطأ',
+                            desc: 'لا يوجد اتصال بالإنترنت',
                             btnCancelOnPress: () {},
                           ).show();
                         } else if (e.code == "user-not-found") {
@@ -152,8 +167,8 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             dialogType: DialogType.error,
                             animType: AnimType.rightSlide,
-                            title: 'Error',
-                            desc: 'user not found',
+                            title: 'خطأ',
+                            desc: 'المستخدم غير موجود، يرجى التسجيل',
                             btnCancelOnPress: () {},
                           ).show();
                         } else if (e.code == "wrong-password" ||
@@ -165,9 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             dialogType: DialogType.error,
                             animType: AnimType.rightSlide,
-                            title: 'Error',
+                            title: 'خطأ',
                             desc:
-                                'we couldn\'t find an account with that email address or password',
+                                'لا يمكن تسجيل الدخول، تأكد من البريد الإلكتروني وكلمة المرور الخاصة بك',
                             btnCancelOnPress: () {},
                           ).show();
                         } else {
@@ -175,8 +190,8 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             dialogType: DialogType.error,
                             animType: AnimType.rightSlide,
-                            title: 'Error',
-                            desc: 'An error occurred, please try again later',
+                            title: 'خطأ',
+                            desc: 'حدث خطأ ما، يرجى المحاولة مرة أخرى',
                             btnCancelOnPress: () {},
                             // btnOkOnPress: () {},
                           ).show();
@@ -198,29 +213,29 @@ class _LoginPageState extends State<LoginPage> {
                         context: context,
                         dialogType: DialogType.error,
                         animType: AnimType.rightSlide,
-                        title: 'Error',
-                        desc: 'Please fill all fields',
+                        title: 'خطأ',
+                        desc: 'الرجاء إدخال البريد الإلكتروني وكلمة المرور',
                         btnCancelOnPress: () {},
                         // btnOkOnPress: () {},
                       ).show();
                     }
                   },
-                  text: 'Sign In',
+                  text: 'تسجيل الدخول',
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Don\'t have an account ? ',
-                          style: TextStyle(color: Colors.white)),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, Register.id);
                         },
-                        child: const Text('Register',
+                        child: const Text('تسجيل جديد',
                             style: TextStyle(color: Colors.white)),
-                      )
+                      ),
+                      const Text('ليس لديك حساب؟',
+                          style: TextStyle(color: Colors.white)),
                     ],
                   ),
                 )

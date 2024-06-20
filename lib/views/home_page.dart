@@ -6,8 +6,8 @@ import 'package:hajj_app/helpers/show_user_data_in_homep.dart';
 import 'package:hajj_app/views/EmergencyPage.dart';
 import 'package:hajj_app/views/azkar_page.dart';
 import 'package:hajj_app/views/doaa_body.dart';
+import 'package:hajj_app/views/google_map_view.dart';
 import 'package:hajj_app/views/home_body.dart';
-import 'package:hajj_app/views/map_page.dart';
 import 'package:hajj_app/views/mnask_body.dart';
 import 'package:hajj_app/views/place_body.dart';
 import 'package:hajj_app/views/prayer_time.dart';
@@ -49,9 +49,10 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MapScreen(),
+                              builder: (context) =>const SafeArea(child:  GoogleMapView()),
                             ),
                           );
+                         // Navigator.pushNamed(context, GoogleMapView.id);
                         },
                         child: const Icon(
                           Icons.location_on,

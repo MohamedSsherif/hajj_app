@@ -131,12 +131,16 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           focusColor: const Color(0xffBDBDBD),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
+                            
+                            borderSide: const BorderSide(
+                              color: Colors.blueGrey,
+                            ),
                           ),
-                          label: const Text(
+                          hintText:
                             'Enter Your Message',
-                            style:
-                            TextStyle(color: Colors.black, fontSize: 16),
-                          ),
+                            // style:
+                            // TextStyle(color: Colors.black, fontSize: 16),
+                          
                         ),
                       ),
                     ),

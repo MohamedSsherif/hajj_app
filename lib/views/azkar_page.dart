@@ -148,7 +148,7 @@ class _AzkarPageState extends State<AzkarPage> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('الاذكار',style:  TextStyle(color: KTextBrown),),
+        title: const Text('الاذكار',style:  TextStyle(color: KTextColor),),
         centerTitle: true,
       ),
       body: Padding(
@@ -279,7 +279,7 @@ class _AzkarItemState extends State<AzkarItem> {
         }
       },
         child: Card(
-          color: KPrimaryColor,
+          color: KTextWhite,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -323,7 +323,7 @@ class _AzkarItemState extends State<AzkarItem> {
                             '$_currentCount / ${widget.azkar.repeat}',
                             style: const TextStyle(color: Colors.black),
                           ),
-                          progressColor: KIconColor,
+                          progressColor: Colors.blueGrey,
                         ),
                       ),
                     ),

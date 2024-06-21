@@ -180,12 +180,12 @@ class _TasbihPageState extends State<TasbihPage> {
         elevation: 0.0,
         title: const Text('التسبيح ', style: TextStyle(color: Colors.black, fontSize: 24),),
         centerTitle: true,
-        backgroundColor: const Color(0xff51B1E3),
+        backgroundColor:  Colors.blueGrey,
       ),
       body: Stack(
         children: <Widget>[
           Image.asset(
-            'assets/images/HD-wallpaper-ramadan-mosque.jpg',
+            'assets/images/tsbeh.jpg',
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
@@ -215,7 +215,7 @@ class _TasbihPageState extends State<TasbihPage> {
                   ),
                   Text(
                     'Loop $_loops',
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ],
               ),

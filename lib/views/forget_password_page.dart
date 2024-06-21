@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hajj_app/services/auth_service.dart';
-import 'package:hajj_app/services/user_service.dart';
+
 
 class ResetPasswordPage extends StatefulWidget {
   static String id = 'ResetPasswordPage';
+
+  const ResetPasswordPage({super.key});
 
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -25,7 +26,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       try {
         await _authService.sendPasswordResetEmail(_emailController.text);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Password reset email sent')),
+          const SnackBar(content: Text('Password reset email sent')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -39,60 +40,26 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     }
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(title: Text('Reset Password')),
-  //     body: Padding(
-  //       padding: const EdgeInsets.all(16.0),
-  //       child: Form(
-  //         key: _formKey,
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: [
-  //             TextFormField(
-  //               controller: _emailController,
-  //               decoration: InputDecoration(labelText: 'Email'),
-  //               validator: (value) {
-  //                 if (value == null || value.isEmpty) {
-  //                   return 'Please enter your email';
-  //                 }
-  //                 return null;
-  //               },
-  //             ),
-  //             SizedBox(height: 20),
-  //             _isProcessing
-  //                 ? CircularProgressIndicator()
-  //                 : ElevatedButton(
-  //                     onPressed: resetPassword,
-  //                     child: Text('Reset Password'),
-  //                   ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.blueGrey,
         title: const Text(
           'استعاده الرقم السرى',
           style: TextStyle(color: Colors.white),
         ),
       ),
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.blueGrey,
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'ادخل البريد الالكترونى الخاص بك ',
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),

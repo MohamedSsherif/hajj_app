@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
                     backgroundColor: Colors.white,
                   ),
                   Text(
-                    'مسلم',
+                    'الحج الذكى',
                     style: GoogleFonts.lemonada(
                         textStyle: const TextStyle(
                       color: Colors.white,
@@ -88,11 +88,11 @@ class _RegisterState extends State<Register> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text('تسجيل حساب جديد',
-                             style: GoogleFonts.arefRuqaa(
+                        Text(' حساب جديد',
+                             style: GoogleFonts.lemonada(
                             textStyle: const TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
+                          fontSize: 18,
                         )),
                         )
                       ],

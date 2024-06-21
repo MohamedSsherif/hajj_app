@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>const SafeArea(child:  GoogleMapView()),
+                              builder: (context) =>const  GoogleMapView(),
                             ),
                           );
                          // Navigator.pushNamed(context, GoogleMapView.id);
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         'قافلة المسلمين',
-                        style: TextStyle(color: Colors.black, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24),
                       ),
                     ),
                     const CircleAvatar(
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
               currentPageIndex = index;
             });
           },
-          indicatorColor: Colors.amber,
+          indicatorColor: Colors.blueGrey,
           selectedIndex: currentPageIndex,
           destinations: const <Widget>[
             NavigationDestination(

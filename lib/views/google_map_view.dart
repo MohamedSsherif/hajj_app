@@ -74,15 +74,17 @@ class _GoogleMapViewState extends State<GoogleMapView> {
      body :
      Stack(
       children: [
-        GoogleMap(
-          polylines: polyLines,
-          markers: markers,
-          onMapCreated: (controller) {
-            googleMapController = controller;
-            updateCurrentLocation();
-          },
-          zoomControlsEnabled: false,
-          initialCameraPosition: initalCameraPoistion,
+        SafeArea(
+          child: GoogleMap(
+            polylines: polyLines,
+            markers: markers,
+            onMapCreated: (controller) {
+              googleMapController = controller;
+              updateCurrentLocation();
+            },
+            zoomControlsEnabled: false,
+            initialCameraPosition: initalCameraPoistion,
+          ),
         ),
         Positioned(
           top: 16,

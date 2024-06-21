@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 10),
                  Text(
-                  'مسلم',
+                  'الحج الذكى',
                 
                    style: GoogleFonts.lemonada(
                             textStyle: const TextStyle(

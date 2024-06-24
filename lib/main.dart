@@ -12,6 +12,7 @@ import 'package:hajj_app/auth/login_page.dart';
 import 'package:hajj_app/views/prayer_time.dart';
 import 'package:hajj_app/views/quibla.dart';
 import 'package:hajj_app/auth/register_page.dart';
+import 'package:hajj_app/views/splash.dart';
 import 'package:hajj_app/views/tasbih_page.dart';
 import 'package:hajj_app/views/update_user_info.dart';
 
@@ -45,8 +46,10 @@ class Hajj extends StatelessWidget {
         ResetPasswordPage.id: (context) =>  const ResetPasswordPage(),
         //userId: FirebaseAuth.instance.currentUser!.uid
       },
-      initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id : HomePage.id,
-      //initialRoute: GoogleMapView.id,
+      initialRoute: FirebaseAuth.instance.currentUser==null? LoginPage.id   : HomePage.id,
+      home: const SplashPage(),
+     // initialRoute: LoginPage.id,
+      //home: const SplashPage(),
     );
   }
 }

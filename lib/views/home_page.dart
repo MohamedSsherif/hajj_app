@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'قافلة المسلمين',
+                        'الحج الذكى',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                       ),
                     ),
